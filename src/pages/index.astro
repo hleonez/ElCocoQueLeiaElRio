@@ -1,15 +1,19 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Proyecto en preparación</title>
-  </head>
-  <body>
-    <main>
-      <h1>Proyecto en preparación</h1>
-      <p>La estructura inicial está lista. El contenido y el diseño se incorporarán en una siguiente fase.</p>
-    </main>
-  </body>
-</html>
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import LandingHeader from '../components/LandingHeader.astro';
+import LandingSection from '../components/LandingSection.astro';
+import LandingFooter from '../components/LandingFooter.astro';
+import { landingContent } from '../content/landing';
+
+const sections = landingContent.sections.filter((section) => section.enabled);
+const enabledIds = new Set(sections.map((section) => section.id));
+---
+
+<LandingLayout seo={landingContent.seo}>
+  <LandingHeader title={landingContent.book.title} sections={sections} controls={landingContent.controls} />
+  <main id="contenido" tabindex="-1">
+    {!enabledIds.has('inicio') && <h1 class="container fallback-title">{landingContent.book.title}</h1>}
+    {sections.map((section) => <LandingSection section={section} content={landingContent} enabledIds={enabledIds} />)}
+  </main>
+  <LandingFooter footer={landingContent.footer} controls={landingContent.controls} />
+</LandingLayout>

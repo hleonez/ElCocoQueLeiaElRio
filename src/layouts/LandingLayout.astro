@@ -1,0 +1,33 @@
+---
+import type { LandingContent } from '../content/types';
+import '../styles/landing.css';
+import '../styles/motion.css';
+
+interface Props {
+  seo: LandingContent['seo'];
+}
+
+const { seo } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {seo.noindex && <meta name="robots" content="noindex" />}
+    <meta name="description" content={seo.description} />
+    <title>{seo.title}</title>
+    <script is:inline>
+      try {
+        if (localStorage.getItem('drilo-motion') === 'off') document.documentElement.dataset.motion = 'off';
+      } catch { /* La lectura no depende del almacenamiento. */ }
+    </script>
+  </head>
+  <body>
+    <div class="journey-progress" aria-hidden="true"></div>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div class="draft-note">Versión en revisión · Ilustraciones originales pendientes</div>
+    <slot />
+  </body>
+</html>

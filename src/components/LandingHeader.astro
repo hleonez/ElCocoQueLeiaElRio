@@ -1,0 +1,35 @@
+---
+import type { LandingSection } from '../content/types';
+import type { LandingContent } from '../content/types';
+import MotionControl from './MotionControl.astro';
+
+interface Props {
+  title: string;
+  sections: LandingSection[];
+  controls: LandingContent['controls'];
+}
+
+const { title, sections, controls } = Astro.props;
+const navigation = sections.filter((section) => section.enabled && section.navigationLabel);
+const home = sections.find((section) => section.enabled);
+---
+
+<div class="header-surface">
+<header class="site-header container">
+  {home ? <a class="site-title" href={`#${home.id}`}>{title}</a> : <span class="site-title">{title}</span>}
+  {navigation.length > 0 && (
+    <nav aria-label="Navegación principal">
+      <ul class="navigation-list">
+        {navigation.map((section) => (
+          <li>
+            <a class:list={[section.id === 'libro' && 'button button--small']} href={`#${section.id}`}>
+              {section.navigationLabel}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
+  <MotionControl controls={controls} />
+</header>
+</div>

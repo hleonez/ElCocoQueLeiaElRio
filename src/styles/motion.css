@@ -1,0 +1,136 @@
+/* Progressive enhancement. No scroll handlers, hidden copy, loops or scroll hijacking.
+   Transforms carry the movement; text animation is confined to the main title. */
+@keyframes journey-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes title-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(var(--word-drift) * var(--title-drift))); }
+}
+@keyframes river-bank {
+  from { transform: translateY(var(--scene-drift)); }
+  to { transform: translateY(calc(var(--scene-drift) * -1)); }
+}
+@keyframes river-light { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+@keyframes character-drift { from { transform: translateY(8px) rotate(-1deg); } to { transform: translateY(-8px) rotate(1deg); } }
+@keyframes cover-drift {
+  from { transform: translateY(var(--cover-lift)) rotate(10deg); }
+  to { transform: translateY(calc(var(--cover-lift) * -1)) rotate(-4deg); }
+}
+@keyframes cover-arrival {
+  from { transform: translateY(var(--cover-lift)) rotate(-4deg) scale(0.96); }
+  to { transform: translateY(0) rotate(0) scale(1); }
+}
+@keyframes moment-progress { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes shore-arrival { from { transform: scaleY(0.55); } to { transform: scaleY(1); } }
+@keyframes river-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes river-leaf {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+@keyframes river-current { from { transform: translateX(-8px); } to { transform: translateX(10px); } }
+@keyframes river-reeds { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+
+@supports (animation-timeline: view()) and (animation-range: contain) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root { --scene-drift: 8px; --title-drift: 6px; --cover-lift: 12px; }
+    :root:not([data-motion='off']) { scroll-behavior: smooth; }
+    :root:not([data-motion='off']) .journey-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      height: 3px;
+      z-index: 5;
+      pointer-events: none;
+      background: var(--scarf);
+      transform-origin: left;
+      animation: journey-progress 1s linear both;
+      animation-timeline: scroll(root block) !important;
+    }
+    :root:not([data-motion='off']) .section--inicio { view-timeline: --hero block; }
+    :root:not([data-motion='off']) .animated-title__word {
+      animation: title-drift 1s linear both;
+      animation-timeline: --hero !important;
+      animation-range: exit 0% exit 100%;
+    }
+    :root:not([data-motion='off']) .hero-cover {
+      animation: cover-drift 1s linear both;
+      animation-timeline: --hero !important;
+      animation-range: entry 0% exit 100%;
+    }
+    :root:not([data-motion='off']) .story-layout { view-timeline: --story block; }
+    :root:not([data-motion='off']) .river-journey { view-timeline: --river block; }
+    :root:not([data-motion='off']) .river-journey__trail {
+      animation: river-trace 1s linear both;
+      /* Keep this separate: CSS minifiers can fold it into a newer shorthand
+         that older timeline-capable browsers do not understand. */
+      animation-timeline: --river !important;
+      animation-range: entry 20% exit 80%;
+    }
+    :root:not([data-motion='off']) .river-journey__leaf {
+      transform: none;
+      offset-path: path('M218 44C500 100 498 220 300 260S44 418 250 450 510 590 330 676');
+      offset-anchor: 0px 0px;
+      offset-rotate: auto 45deg;
+      animation: river-leaf 1s linear both;
+      animation-timeline: --river !important;
+      animation-range: entry 20% exit 80%;
+    }
+    :root:not([data-motion='off']) .story-moment { view-timeline: --moment block; }
+    :root:not([data-motion='off']) .story-moment::after {
+      animation: moment-progress 1s linear both;
+      animation-timeline: --moment !important;
+      animation-range: entry 35% exit 65%;
+    }
+    :root:not([data-motion='off']) .river-scene { view-timeline: --scene block; }
+    :root:not([data-motion='off']) .river-scene__bank {
+      animation: river-bank 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 0% exit 100%;
+    }
+    :root:not([data-motion='off']) .river-scene__sun {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: river-light 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 0% exit 100%;
+    }
+    :root:not([data-motion='off']) .river-scene__character img {
+      animation: character-drift 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 0% exit 100%;
+    }
+    :root:not([data-motion='off']) .river-scene__ripples {
+      animation: river-current 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 15% exit 85%;
+    }
+    :root:not([data-motion='off']) .river-scene__reeds {
+      transform-origin: 50% 75%;
+      animation: river-reeds 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 15% exit 85%;
+    }
+    :root:not([data-motion='off']) .purchase-cover {
+      animation: cover-arrival 1s linear both;
+      animation-timeline: view() !important;
+      animation-range: entry 10% entry 90%;
+    }
+    :root:not([data-motion='off']) .site-footer { view-timeline: --farewell block; }
+    :root:not([data-motion='off']) .site-footer::before {
+      transform-origin: bottom;
+      animation: shore-arrival 1s linear both;
+      animation-timeline: --farewell !important;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-width: 48rem) {
+    :root { --scene-drift: 18px; --title-drift: 12px; --cover-lift: 24px; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-width: 64rem) and (min-height: 42rem) {
+    :root:not([data-motion='off']) .river-journey { position: sticky; top: max(2rem, calc((100svh - 36rem) / 2)); }
+    :root:not([data-motion='off']) .river-journey__trail,
+    :root:not([data-motion='off']) .river-journey__leaf {
+      animation-timeline: --story !important;
+      animation-range: contain;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+  format?: 'scene' | 'cover' | 'portrait';
+}
+
+const { label, format = 'scene' } = Astro.props;
+---
+
+<div class:list={['image-placeholder', `image-placeholder--${format}`]}>
+  <span>{label}</span>
+</div>

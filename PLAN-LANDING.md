@@ -88,6 +88,8 @@ El tono será cálido, sencillo y respetuoso. El mensaje comercial se concentrar
 
 La animación principal será el viaje de Drilo. Para desarrollarla propongo **GSAP con ScrollTrigger**, que permite vincular escenas y movimientos al avance del scroll. La adaptación por tamaño de pantalla y preferencias de movimiento se resolverá mediante configuraciones específicas. [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [adaptación con matchMedia](https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/).
 
+**Decisión de implementación en fases 4 y 5:** los efectos disponibles se resuelven con timelines CSS nativas y una onda manual mediante Web Animations API. No se incorpora GSAP: el recorrido actual no necesita coreografía de poses ni medir el scroll con JavaScript. Los originales y la coreografía final del personaje siguen pendientes.
+
 | Momento | Animación propuesta | Adaptación móvil |
 |---|---|---|
 | Entrada | Aparición suave de Drilo y el título; una onda breve señala el río. | Entrada más corta y menor desplazamiento. |
@@ -110,30 +112,18 @@ Con los recursos actuales, el primer diseño podrá trabajar con la portada. El 
 
 **7. Títulos que cambian al pasar el mouse**
 
-Incluiré la interacción solicitada en **dos o tres títulos secundarios**, mediante una alteración breve de algunas letras.
+**Alcance actualizado en fase 5, por petición del usuario:** el movimiento de texto se limita al **título principal**. Se sustituye la propuesta inicial de alterar palabras en títulos secundarios por una onda de movimiento que conserva siempre la escritura correcta. Los subtítulos y el cuerpo permanecen estáticos.
 
-Conviene contextualizarla como una metáfora gráfica: la dislexia no equivale a ver letras invertidas ni puede reproducirse mediante este efecto. La International Dyslexia Association señala expresamente ese mito. [Referencia sobre dislexia](https://dyslexiaida.org/dyslexia-basics/).
+1. El título aparece completo y legible desde el inicio.
+2. Al entrar el puntero, una onda recorre sus letras durante un máximo de **720 ms**.
+3. El botón «Animar el título» permite probar la misma onda con teclado o toque.
+4. El título recupera su posición al terminar, aunque el puntero siga encima. No se repite en bucle ni se acumulan interacciones.
+5. Salir con el puntero, perder el foco del botón, ocultar la página o desactivar movimiento cancela la onda.
+6. Al avanzar por la primera pantalla, las palabras derivan suavemente con el scroll, sin ocultarse ni cambiar su contenido.
 
-Comportamiento propuesto:
+Se conservan el nombre accesible, los espacios y los acentos al copiar y pegar. La animación usa transformaciones y no modifica la distribución del contenido. El control general y la preferencia de movimiento reducido desactivan tanto la onda como la deriva.
 
-1. El título aparece correctamente escrito.
-2. Al entrar el puntero, una palabra cambia durante aproximadamente **600–900 ms**.
-3. Se usa una secuencia preparada de dos o tres estados, para controlar el resultado.
-4. El texto vuelve automáticamente a su forma original aunque el puntero permanezca encima.
-5. Al salir el puntero, se restaura de inmediato.
-6. Se evita repetir el efecto continuamente.
-
-Ejemplo de trabajo:
-
-**«Cada quien aprende a su ritmo» → alteración breve de «aprende» → texto original.**
-
-El título oficial del libro, los párrafos, los botones y los datos de compra permanecerán estables.
-
-La implementación conservará el texto correcto para lectores de pantalla y copiar/pegar. El espacio reservado evitará saltos de línea durante el efecto. Habrá un control accesible para probarlo con teclado o toque, y se desactivará con movimiento reducido o con el control general de animaciones.
-
-Junto a la primera interacción aparecerá una explicación breve:
-
-> «Un juego visual sobre las letras y las distintas maneras de aprender.»
+La explicación junto al botón es «Una onda en las letras, como el agua del río». Es un juego gráfico del río; no se plantea como una simulación de cómo lee una persona con dislexia.
 
 **8. Cómo quedará editable**
 
@@ -193,13 +183,23 @@ La primera versión incluirá el recorrido, los enlaces externos y la estructura
 - Pasan `npm run check` y `npm run build`.
 - Se preparan los metadatos y la imagen para compartir antes de retirar el `noindex` de la base actual.
 
-Este entregable define la estructura y el comportamiento propuestos. La landing todavía no se ha implementado ni publicado.
+Este documento define la estructura y el comportamiento propuestos. La fase **Contenido** quedó preparada el **22 de noviembre de 2026**: [inventario, fuentes y pendientes](CONTENIDO.md), [borradores y datos editables](src/content/landing.ts) y [contratos de contenido](src/content/types.ts). Los textos siguen sujetos a revisión editorial; completar esta fase no confirma el título ni autoriza los materiales pendientes. Se verificaron `npm run check` y `npm run build`.
+
+La fase **Wireframe** quedó implementada el **22 de noviembre de 2026**: [composición móvil y escritorio, contraste con Contenido y continuidad](WIREFRAME.md). La ruta inicial ya consume los datos editoriales, respeta el orden y la visibilidad de las secciones y reserva espacio para las imágenes faltantes. Interior y Autora continúan desactivados; solo se muestra la tienda de ITA preparada en la fase anterior. Se verificaron `npm run check`, `npm run build`, anclas, acceso por teclado y distribución a 320, 390, 768 y 1440 px sin desbordamiento horizontal.
+
+La fase **Diseño visual** quedó implementada el **22 de noviembre de 2026**: [dirección gráfica, variables y continuidad](DISENO-VISUAL.md). La primera pantalla y «Conoce a Drilo» fijan la propuesta de color, tipografía y orillas del río; el resto conserva la composición del wireframe con estilos comunes de lectura. Sin originales autorizados, Drilo y la portada mantienen reservas explícitas. Se conserva `noindex` y no se ha publicado.
+
+La fase **Versión estática** quedó implementada el **22 de noviembre de 2026**: [composición completa, movimiento progresivo y verificación](VERSION-ESTATICA.md). Historia, Propósito, Compra y Pie continúan la dirección de la fase 3. Por petición expresa, se adelanta una primera capa de animaciones ligadas al scroll: trazo del cauce, recorrido de una hoja decorativa y movimiento leve de ondas y vegetación. Los controles de movimiento están operativos y se respeta la preferencia del sistema. La experiencia completa mantiene una base estática legible.
+
+La fase **Animación** quedó implementada el **22 de noviembre de 2026** para los recursos disponibles: [efectos, accesibilidad, edición y pruebas](ANIMACIONES.md). Solo el título principal recibe movimiento de texto: onda manual y deriva ligada al scroll. Las escenas tienen profundidad por capas; la portada acompaña la entrada y se asienta en compra; Historia muestra su avance también en móvil, y el pie cierra con una orilla animada. Los textos de lectura permanecen estables y el scroll conserva su comportamiento nativo.
+
+La siguiente fase es **Validación**: revisión editorial y de lanzamiento, integración y revisión de los originales autorizados, galería manual cuando existan interiores y pruebas finales en dispositivos y navegadores objetivo. La coreografía final de Drilo necesita su ilustración; la animación del recurso está preparada sin inventar poses. Esta entrega conserva `noindex` y no publica el sitio.
 
 **Checklist de fases**
 
-- [ ] Contenido
-- [ ] Wireframe
-- [ ] Diseño visual
-- [ ] Versión estática
-- [ ] Animación
+- [x] Contenido
+- [x] Wireframe
+- [x] Diseño visual
+- [x] Versión estática
+- [x] Animación (recursos disponibles; ilustraciones originales pendientes)
 - [ ] Validación
