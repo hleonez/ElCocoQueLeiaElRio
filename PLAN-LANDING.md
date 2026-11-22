@@ -197,13 +197,15 @@ Este documento define la estructura y el comportamiento propuestos. La fase **Co
 
 La fase **Wireframe** quedó implementada el **22 de noviembre de 2026**: [composición móvil y escritorio, contraste con Contenido y continuidad](WIREFRAME.md). La ruta inicial ya consume los datos editoriales, respeta el orden y la visibilidad de las secciones y reserva espacio para las imágenes faltantes. Interior y Autora continúan desactivados; solo se muestra la tienda de ITA preparada en la fase anterior. Se verificaron `npm run check`, `npm run build`, anclas, acceso por teclado y distribución a 320, 390, 768 y 1440 px sin desbordamiento horizontal.
 
-La siguiente fase es **Diseño visual**. La página local es un wireframe en escala de grises con `noindex`; conserva los pendientes editoriales y de materiales, y no se ha publicado.
+La fase **Diseño visual** quedó implementada el **22 de noviembre de 2026**: [dirección gráfica, variables y continuidad](DISENO-VISUAL.md). La primera pantalla y «Conoce a Drilo» fijan la propuesta de color, tipografía y orillas del río; el resto conserva la composición del wireframe con estilos comunes de lectura. Sin originales autorizados, Drilo y la portada mantienen reservas explícitas. Se conserva `noindex` y no se ha publicado.
+
+La siguiente fase es **Versión estática**: extender el lenguaje visual a todo el recorrido e integrar los materiales autorizados disponibles. Los pendientes editoriales, las animaciones y la galería manual continúan abiertos.
 
 **Checklist de fases**
 
 - [x] Contenido
 - [x] Wireframe
-- [ ] Diseño visual
+- [x] Diseño visual
 - [ ] Versión estática
 - [ ] Animación
 - [ ] Validación
