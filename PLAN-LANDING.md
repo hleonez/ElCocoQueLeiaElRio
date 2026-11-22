@@ -199,13 +199,15 @@ La fase **Wireframe** quedó implementada el **22 de noviembre de 2026**: [compo
 
 La fase **Diseño visual** quedó implementada el **22 de noviembre de 2026**: [dirección gráfica, variables y continuidad](DISENO-VISUAL.md). La primera pantalla y «Conoce a Drilo» fijan la propuesta de color, tipografía y orillas del río; el resto conserva la composición del wireframe con estilos comunes de lectura. Sin originales autorizados, Drilo y la portada mantienen reservas explícitas. Se conserva `noindex` y no se ha publicado.
 
-La siguiente fase es **Versión estática**: extender el lenguaje visual a todo el recorrido e integrar los materiales autorizados disponibles. Los pendientes editoriales, las animaciones y la galería manual continúan abiertos.
+La fase **Versión estática** quedó implementada el **22 de noviembre de 2026**: [composición completa, movimiento progresivo y verificación](VERSION-ESTATICA.md). Historia, Propósito, Compra y Pie continúan la dirección de la fase 3. Por petición expresa, se adelanta una primera capa de animaciones ligadas al scroll: trazo del cauce, recorrido de una hoja decorativa y movimiento leve de ondas y vegetación. Los controles de movimiento están operativos y se respeta la preferencia del sistema. La experiencia completa mantiene una base estática legible.
+
+La siguiente fase es **Animación**: completar el viaje de Drilo con materiales autorizados y los títulos interactivos contextualizados. Los originales, los pendientes editoriales, la galería manual y la validación final de lanzamiento continúan abiertos. Esta entrega no publica el sitio.
 
 **Checklist de fases**
 
 - [x] Contenido
 - [x] Wireframe
 - [x] Diseño visual
-- [ ] Versión estática
+- [x] Versión estática
 - [ ] Animación
 - [ ] Validación

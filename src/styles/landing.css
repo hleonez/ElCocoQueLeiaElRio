@@ -1,4 +1,4 @@
-/* Fase 3: primera pantalla y Conoce a Drilo; base compartida para el resto. */
+/* Fase 4: recorrido completo, sobre la dirección visual de la fase 3. */
 :root {
   --ink: #203b32;
   --forest: #244e3b;
@@ -41,6 +41,10 @@ li, p, dd, a, .image-placeholder { overflow-wrap: anywhere; }
 .draft-note { padding: 0.5rem var(--page-gutter); background: var(--forest); color: #fff; text-align: center; font-size: 0.875rem; line-height: 1.5; }
 .header-surface { background: var(--paper); }
 .site-header { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; padding-block: 1.5rem; }
+.motion-control { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 2.75rem; padding: 0.55rem 0; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-size: 0.875rem; line-height: 1.4; cursor: pointer; }
+.motion-control svg { flex: 0 0 auto; }
+.motion-control[hidden] { display: none; }
+.motion-control:disabled { cursor: default; border-bottom-style: dotted; }
 .site-title { max-width: 23ch; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1.25; text-decoration: none; }
 .navigation-list, .purchase-links, .external-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; list-style: none; margin: 0; padding: 0; }
 .navigation-list a { display: inline-flex; min-height: 2.75rem; align-items: center; font-weight: 700; }
@@ -81,20 +85,37 @@ li, p, dd, a, .image-placeholder { overflow-wrap: anywhere; }
 .river-scene--portrait .river-scene__bank { fill: var(--paper); }
 .river-scene--portrait .river-scene__sun { fill: var(--scarf); }
 
-/* Base de lectura: la composición detallada de estos módulos sigue en fase 4. */
+/* El río se abre en Historia y desemboca en la orilla de compra. */
 .image-placeholder { display: grid; place-items: center; min-height: 12rem; aspect-ratio: 4 / 3; border: 1px dashed #68815d; background: var(--surface); padding: 1rem; color: var(--forest); text-align: center; }
 .image-placeholder--cover { aspect-ratio: 1; min-height: 0; }
 .image-placeholder--portrait { aspect-ratio: 4 / 5; }
 .book-cover { width: 100%; aspect-ratio: 1; object-fit: contain; }
-.section--historia { border-top: 1px solid var(--line); }
+.section--historia { position: relative; background: var(--river); }
+.section--historia::before { content: ''; position: absolute; inset: -1.5rem 0 auto; height: 1.5rem; background: var(--river); clip-path: ellipse(66% 100% at 54% 100%); }
+.section--historia .section-copy { max-width: 42rem; }
 .story-layout { display: grid; align-items: start; gap: 2rem; }
 .story-moments { display: grid; gap: 2rem; list-style: none; margin: 0; padding: 0; }
-.story-moments li { padding-left: 1.5rem; border-left: 2px solid var(--line); }
+.story-moment { position: relative; padding: 1.5rem 0 1.5rem 1.75rem; border-left: 2px solid #477b72; }
+.story-moment::before { content: ''; position: absolute; top: 1.9rem; left: -0.4rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--forest); }
+.story-moment h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2.125rem); line-height: 1.2; }
 .story-moments h3 + p { margin-top: 0.75rem; }
-.section--proposito, .section--libro { background: var(--surface); }
-.conversation { border-top: 1px solid var(--line); padding-top: 1.5rem; }
-.conversation ul { margin: 1.25rem 0 0; padding-left: 1.25rem; }
-.conversation li + li { margin-top: 1rem; }
+.river-journey { position: relative; width: min(100%, 30rem); margin-inline: auto; }
+.river-journey__map { display: block; width: 100%; max-height: 32rem; overflow: visible; }
+.river-journey__shore { stroke: #dce8ba; stroke-width: 142; stroke-linecap: round; }
+.river-journey__water { stroke: #e9f6ed; stroke-width: 98; stroke-linecap: round; }
+.river-journey__trail { stroke: #477b72; stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.river-journey__plants { color: var(--reed); }
+.river-journey__leaf { transform: translate(330px, 676px) rotate(25deg); }
+.river-journey__art { position: absolute; top: 38%; left: 40%; width: 49%; }
+.river-journey__art p { max-width: 19ch; padding: 1rem; border: 1px dashed #68815d; border-radius: 44% 48% 39% 30%; background: var(--surface); font-size: 0.875rem; line-height: 1.5; text-align: center; }
+.section--proposito { background: var(--paper); }
+.section--proposito .section-copy { max-width: 34rem; }
+.conversation { border-top: 1px solid #9caa80; padding-top: 1.5rem; }
+.conversation h3 { font-family: var(--font-display); font-size: 1.5rem; }
+.conversation ul { margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.conversation li { padding-block: 1rem; border-bottom: 1px solid #b5bd96; }
+.conversation li:first-child { padding-top: 0; }
+.section--interior { background: #fff; }
 .gallery-grid { display: grid; gap: 1.5rem; }
 .gallery-grid img { width: 100%; }
 figcaption { margin-top: 0.75rem; }
@@ -102,15 +123,24 @@ figcaption span { display: block; font-size: 0.875rem; }
 .author-name { font-weight: 700; }
 .author-photo { width: 100%; max-width: 20rem; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 1.5rem; }
 .author-details .external-links { margin-top: 1rem; }
+.section--autora { background: var(--surface); }
+.section--libro { position: relative; isolation: isolate; background: #fff; }
+.section--libro::before { content: ''; position: absolute; inset: 0 0 auto; height: clamp(14rem, 35vw, 25rem); z-index: -1; background: var(--surface); border-radius: 0 0 50% 8%; }
+.section--libro .section-copy { max-width: 46rem; }
 .book-details { display: grid; gap: 2rem; align-items: start; }
-.purchase-cover { width: min(100%, 20rem); }
+.purchase-cover { position: relative; width: min(100%, 20rem); padding: 1.5rem; background: var(--paper); border-radius: 48% 46% 20% 30%; }
+.purchase-cover .image-placeholder { border-style: solid; background: #fff; box-shadow: -0.4rem 0.4rem 0 #d5dbb8; }
+.purchase-cover .book-cover { box-shadow: -0.4rem 0.4rem 0 #d5dbb8; }
 .edition-facts { margin: 1.25rem 0 0; }
 .edition-facts > div { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-block: 0.5rem; border-bottom: 1px solid var(--line); }
 .edition-facts dt { font-weight: 700; }
 .edition-facts dd { margin: 0; }
 .purchase-links { margin-top: 1.5rem; }
 .physical-stores { margin-top: 2rem; }
-.site-footer { padding-block: 3rem; border-top: 1px solid var(--line); }
+.site-footer { position: relative; padding-block: 3rem; background: var(--forest); color: #fff; }
+.site-footer::before { content: ''; position: absolute; inset: -1.5rem 0 auto; height: 1.5rem; background: var(--forest); clip-path: ellipse(70% 100% at 35% 100%); }
+.site-footer :focus-visible { outline-color: var(--paper); }
+.site-footer .motion-control { margin-top: 1.5rem; }
 .farewell { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; }
 .site-footer .external-links { margin-top: 1.5rem; }
 .fallback-title { padding-block: 2rem; }
@@ -122,11 +152,16 @@ figcaption span { display: block; font-size: 0.875rem; }
   .section--autora .section-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 3rem; }
   .section--drilo .section-copy { grid-column: 2; grid-row: 1; }
   .section--drilo .river-scene { grid-column: 1; grid-row: 1; }
-  .story-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; }
+  .story-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; }
   .conversation { padding-top: 0; padding-left: 2rem; border-top: 0; border-left: 1px solid var(--line); }
   .book-details { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); gap: 3rem; }
   .purchase-cover { width: 100%; max-width: 25rem; }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64rem) and (min-height: 42rem) {
+  .story-moment { min-height: 28rem; display: flex; flex-direction: column; justify-content: center; }
+  .story-moment::before { top: calc(50% - 0.35rem); }
 }
 
 @media (max-width: 47.999rem) {

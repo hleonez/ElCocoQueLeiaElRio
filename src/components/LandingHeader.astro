@@ -1,12 +1,15 @@
 ---
 import type { LandingSection } from '../content/types';
+import type { LandingContent } from '../content/types';
+import MotionControl from './MotionControl.astro';
 
 interface Props {
   title: string;
   sections: LandingSection[];
+  controls: LandingContent['controls'];
 }
 
-const { title, sections } = Astro.props;
+const { title, sections, controls } = Astro.props;
 const navigation = sections.filter((section) => section.enabled && section.navigationLabel);
 const home = sections.find((section) => section.enabled);
 ---
@@ -27,5 +30,6 @@ const home = sections.find((section) => section.enabled);
       </ul>
     </nav>
   )}
+  <MotionControl controls={controls} />
 </header>
 </div>
