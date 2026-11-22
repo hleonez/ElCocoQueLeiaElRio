@@ -1,6 +1,6 @@
 # Landing del libro
 
-Base técnica con Astro, TypeScript estricto y generación estática. La fase Contenido está preparada: inventario editorial, borradores y campos pendientes. Todavía no incluye diseño, secciones comerciales renderizadas, animaciones ni servicios externos. El nombre del paquete es un identificador técnico, no confirma el título del libro.
+Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido y Wireframe: inventario editorial, borradores y estructura responsive con espacios reservados para imágenes. Todavía no incluye el diseño visual final, animaciones ni servicios externos. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
 
@@ -28,11 +28,11 @@ Antes de entregar cambios, ejecutar `npm run check` y `npm run build`. `preview`
 
 ```text
 src/
-  pages/           Rutas; index.astro es la página inicial provisional
+  pages/           Rutas; index.astro compone el wireframe desde el contenido
   layouts/         Estructuras compartidas de página
-  components/      Secciones y elementos reutilizables futuros
+  components/      Cabecera, secciones, pie y reservas de imagen
   content/         Contratos y contenido editorial centralizado
-  styles/          Futuros tokens visuales y estilos globales
+  styles/          wireframe.css: jerarquía y distribución responsive provisional
   assets/images/   Imágenes que Astro procesará al integrarlas
 public/
   fonts/           Fuentes web con licencia
@@ -47,9 +47,9 @@ Los archivos `.gitkeep` conservan carpetas vacías y pueden retirarse al añadir
 
 El inventario, las fuentes, el estado de los datos y los materiales pendientes están en [CONTENIDO.md](CONTENIDO.md). La fuente editable de los textos es [src/content/landing.ts](src/content/landing.ts): exporta `book`, `author` y `landingContent`, con las secciones ordenadas, su visibilidad, los enlaces de compra y los metadatos en borrador.
 
-`src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes futuros recibirán estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
+`src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes reciben estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
 
-El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú futuro deberá excluir secciones con `enabled: false`.
+El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
 
 No se incluyen datos de ejemplo ni testimonios ficticios. No hace falta CMS ni base de datos para mantener estos archivos. Los tipos comprueban la estructura durante el desarrollo; no validan la existencia de enlaces ni datos externos.
 
@@ -69,10 +69,10 @@ Guardar fuentes editables en `design/originals/`; no guardar allí datos sensibl
 
 Colocar las imágenes web en `src/assets/images/` para integrarlas más adelante con las herramientas de imágenes de Astro. Reservar `public/` para archivos que deban copiarse sin procesamiento: todo lo colocado allí será público en una futura publicación. Nombrar archivos en minúsculas y con guiones.
 
-## Siguiente fase
+## Wireframe y siguiente fase
 
-Construir el wireframe móvil y de escritorio a partir del contenido preparado y los espacios reservados para materiales faltantes. El avance de las etapas se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
+El wireframe móvil y de escritorio se sirve en `/` con `npm run dev`. Usa fuente de sistema, escala de grises y reservas de imagen con etiquetas; no representa el diseño visual definitivo. La composición, la comparación con Contenido y las instrucciones de edición están en [WIREFRAME.md](WIREFRAME.md). El avance de las etapas se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
 
-La página actual es únicamente una comprobación técnica, sin estilos, y todavía no consume `landingContent`. Lleva `noindex` para evitar indexarla accidentalmente. Antes del lanzamiento habrá que confirmar los pendientes editoriales, sustituir la página provisional y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
+La siguiente fase es **Diseño visual**: definir la primera pantalla y una sección interior usando materiales autorizados. El wireframe consume `landingContent`, conserva su `noindex` y funciona sin JavaScript. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.

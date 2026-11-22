@@ -195,12 +195,14 @@ La primera versión incluirá el recorrido, los enlaces externos y la estructura
 
 Este documento define la estructura y el comportamiento propuestos. La fase **Contenido** quedó preparada el **22 de noviembre de 2026**: [inventario, fuentes y pendientes](CONTENIDO.md), [borradores y datos editables](src/content/landing.ts) y [contratos de contenido](src/content/types.ts). Los textos siguen sujetos a revisión editorial; completar esta fase no confirma el título ni autoriza los materiales pendientes. Se verificaron `npm run check` y `npm run build`.
 
-La siguiente fase es **Wireframe**. La página pública sigue siendo la base técnica provisional con `noindex`; todavía no renderiza la landing ni se ha publicado.
+La fase **Wireframe** quedó implementada el **22 de noviembre de 2026**: [composición móvil y escritorio, contraste con Contenido y continuidad](WIREFRAME.md). La ruta inicial ya consume los datos editoriales, respeta el orden y la visibilidad de las secciones y reserva espacio para las imágenes faltantes. Interior y Autora continúan desactivados; solo se muestra la tienda de ITA preparada en la fase anterior. Se verificaron `npm run check`, `npm run build`, anclas, acceso por teclado y distribución a 320, 390, 768 y 1440 px sin desbordamiento horizontal.
+
+La siguiente fase es **Diseño visual**. La página local es un wireframe en escala de grises con `noindex`; conserva los pendientes editoriales y de materiales, y no se ha publicado.
 
 **Checklist de fases**
 
 - [x] Contenido
-- [ ] Wireframe
+- [x] Wireframe
 - [ ] Diseño visual
 - [ ] Versión estática
 - [ ] Animación

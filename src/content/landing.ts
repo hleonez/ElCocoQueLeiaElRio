@@ -1,9 +1,9 @@
 import type { Author, Book, LandingContent } from './types';
 
 /**
- * Fase Contenido: borradores para la futura landing, no fragmentos del cuento.
+ * Borradores de la fase Contenido, no fragmentos del cuento.
  * Consultar CONTENIDO.md antes de aprobar textos, añadir recursos o publicar.
- * La ruta provisional index.astro todavía no consume estos datos.
+ * El wireframe de index.astro consume estos datos y respeta enabled y el orden.
  */
 const itaProductUrl = 'https://itabooks.com/producto/el-coco-que-leia-en-el-rio/';
 
