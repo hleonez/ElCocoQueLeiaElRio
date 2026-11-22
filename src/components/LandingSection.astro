@@ -1,0 +1,140 @@
+---
+import type { LandingContent, LandingSection } from '../content/types';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  section: LandingSection;
+  content: LandingContent;
+  enabledIds: Set<string>;
+}
+
+const { section, content, enabledIds } = Astro.props;
+const { book, author } = content;
+const actions = [section.primaryAction, section.secondaryAction].filter(
+  (action) => action && enabledIds.has(action.target),
+);
+const showMoments = section.id === 'historia' && Boolean(section.moments?.length);
+// La ficha física solo acompaña a tiendas vinculadas explícitamente con esa edición.
+const editions = book.editions?.filter((edition) =>
+  content.purchaseLinks.some((link) => link.editionId === edition.id),
+);
+---
+
+<section id={section.id} class:list={['landing-section', `section--${section.id}`]} aria-labelledby={`${section.id}-titulo`}>
+  <div class="container section-layout">
+    <div class="section-copy">
+      {section.id === 'inicio'
+        ? <h1 id={`${section.id}-titulo`}>{section.heading}</h1>
+        : <h2 id={`${section.id}-titulo`}>{section.heading}</h2>}
+      {section.id === 'inicio' && <p class="byline">Un cuento de {book.author}</p>}
+      {!showMoments && section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {actions.length > 0 && (
+        <div class="actions">
+          {actions.map((action, index) => action && (
+            <a class:list={['button', index > 0 && 'button--secondary']} href={`#${action.target}`}>{action.label}</a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {section.id === 'inicio' && (
+      <div class="hero-scene">
+        <ImagePlaceholder label="Drilo y el río · Ilustración principal" />
+        <div class="hero-cover">
+          {book.cover
+            ? <img class="book-cover" src={book.cover} alt={`Portada de ${book.title}, de ${book.author}`} />
+            : <ImagePlaceholder label="Portada del libro" format="cover" />}
+        </div>
+      </div>
+    )}
+
+    {section.id === 'drilo' && <ImagePlaceholder label="Ilustración de Drilo" />}
+
+    {section.id === 'historia' && (
+      <div class="story-layout">
+        <ImagePlaceholder label="Escena de Drilo en el río" />
+        {showMoments && (
+          <ol class="story-moments">
+            {section.moments?.map((moment) => (
+              <li>
+                <h3>{moment.heading}</h3>
+                <p>{moment.text}</p>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    )}
+
+    {section.id === 'interior' && (
+      <div class="gallery-grid">
+        {content.gallery.length > 0
+          ? content.gallery.map((image) => (
+              <figure>
+                <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
+                <figcaption>{image.caption} <span>{image.credit}</span></figcaption>
+              </figure>
+            ))
+          : <ImagePlaceholder label="Páginas interiores del cuento" />}
+      </div>
+    )}
+
+    {section.questions && section.questions.length > 0 && (
+      <div class="conversation">
+        <h3>Para conversar en compañía</h3>
+        <ul>{section.questions.map((question) => <li>{question}</li>)}</ul>
+      </div>
+    )}
+
+    {section.id === 'autora' && (
+      <div class="author-details">
+        {author.photo && <img class="author-photo" src={author.photo} alt={author.name} loading="lazy" />}
+        <p class="author-name">{author.name}</p>
+        {author.links.length > 0 && (
+          <ul class="external-links">
+            {author.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
+          </ul>
+        )}
+      </div>
+    )}
+
+    {section.id === 'libro' && (
+      <div class="book-details">
+        <div class="purchase-cover">
+          {book.cover
+            ? <img class="book-cover" src={book.cover} alt={`Portada de ${book.title}, de ${book.author}`} loading="lazy" />
+            : <ImagePlaceholder label="Portada del libro" format="cover" />}
+        </div>
+        <div>
+          {editions?.map((edition) => (
+            <div class="edition">
+              <h3>Edición impresa de {edition.publisher}</h3>
+              <dl class="edition-facts">
+                <div><dt>Edad de lectura</dt><dd>A partir de {edition.minimumReadingAge} años</dd></div>
+                <div><dt>Páginas</dt><dd>{edition.pageCount}</dd></div>
+                <div><dt>Encuadernación</dt><dd>{edition.binding}</dd></div>
+                <div><dt>Formato</dt><dd>{edition.dimensions}</dd></div>
+                <div><dt>Impresión</dt><dd>{edition.printing}</dd></div>
+              </dl>
+            </div>
+          ))}
+          {content.purchaseLinks.length > 0 && (
+            <ul class="purchase-links">
+              {content.purchaseLinks.map((link) => <li><a class="button" href={link.url}>{link.label}</a></li>)}
+            </ul>
+          )}
+          {content.physicalStores.length > 0 && (
+            <div class="physical-stores">
+              <h3>Encuéntralo en librerías</h3>
+              <ul>
+                {content.physicalStores.map((store) => (
+                  <li><a href={store.mapsUrl}>{store.name}</a><p>{store.address}, {store.city}</p></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

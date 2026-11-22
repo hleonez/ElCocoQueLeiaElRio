@@ -1,0 +1,29 @@
+---
+import type { LandingSection } from '../content/types';
+
+interface Props {
+  title: string;
+  sections: LandingSection[];
+}
+
+const { title, sections } = Astro.props;
+const navigation = sections.filter((section) => section.enabled && section.navigationLabel);
+const home = sections.find((section) => section.enabled);
+---
+
+<header class="site-header container">
+  {home ? <a class="site-title" href={`#${home.id}`}>{title}</a> : <span class="site-title">{title}</span>}
+  {navigation.length > 0 && (
+    <nav aria-label="Navegación principal">
+      <ul class="navigation-list">
+        {navigation.map((section) => (
+          <li>
+            <a class:list={[section.id === 'libro' && 'button button--small']} href={`#${section.id}`}>
+              {section.navigationLabel}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</header>

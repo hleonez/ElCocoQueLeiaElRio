@@ -59,7 +59,7 @@ La fuente editable de los textos es [src/content/landing.ts](src/content/landing
 | Compra / `libro` | Cierre, aviso para consultar condiciones en tienda y enlace ITA | Habilitado, sin prometer stock ni entregas |
 | Pie / `pie` | Despedida, crédito textual de autoría y edición | Habilitado; derechos y redes se incorporarán cuando se confirmen |
 
-`enabled` expresa la intención para la futura interfaz, no la aprobación para publicar. `index.astro` aún no renderiza las secciones. Las etiquetas del control de movimiento y del juego de letras ya están centralizadas en `controls`; su comportamiento corresponde a la fase Animación.
+`enabled` expresa la visibilidad en la interfaz, no la aprobación para publicar. El wireframe de `index.astro` ya renderiza las secciones habilitadas y genera la navegación con esos mismos destinos. Las etiquetas del control de movimiento y del juego de letras ya están centralizadas en `controls`; su comportamiento corresponde a la fase Animación.
 
 ## Inventario de materiales
 
@@ -88,4 +88,4 @@ Los originales editables van en `design/originals/`; las imágenes web en `src/a
 4. Al recibir interiores, completar `gallery` con ruta real, dimensiones, texto alternativo, pie y crédito antes de activar `interior`. Documentar por separado si todavía están pendientes de autorización.
 5. Actualizar este inventario al resolver pendientes. Ejecutar `npm run check` y `npm run build` después de cambiar datos o tipos.
 
-La siguiente fase puede construir el wireframe móvil y de escritorio usando estos borradores y reservas de imagen. Antes de publicar faltan confirmar título y edición, revisar los textos con Laura, comprobar las tiendas, obtener recursos y derechos, preparar dominio e imagen social, y completar las fases restantes del plan.
+La fase Wireframe utiliza estos borradores y reservas de imagen; sus decisiones y su contraste con esta entrega están en [WIREFRAME.md](WIREFRAME.md). Antes de publicar faltan confirmar título y edición, revisar los textos con Laura, comprobar las tiendas, obtener recursos y derechos, preparar dominio e imagen social, y completar las fases restantes del plan.
