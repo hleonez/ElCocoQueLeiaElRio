@@ -1,6 +1,7 @@
 ---
 import type { LandingContent, LandingSection } from '../content/types';
 import ImagePlaceholder from './ImagePlaceholder.astro';
+import RiverScene from './RiverScene.astro';
 
 interface Props {
   section: LandingSection;
@@ -39,7 +40,7 @@ const editions = book.editions?.filter((edition) =>
 
     {section.id === 'inicio' && (
       <div class="hero-scene">
-        <ImagePlaceholder label="Drilo y el río · Ilustración principal" />
+        <RiverScene illustration={section.illustration} />
         <div class="hero-cover">
           {book.cover
             ? <img class="book-cover" src={book.cover} alt={`Portada de ${book.title}, de ${book.author}`} />
@@ -48,7 +49,7 @@ const editions = book.editions?.filter((edition) =>
       </div>
     )}
 
-    {section.id === 'drilo' && <ImagePlaceholder label="Ilustración de Drilo" />}
+    {section.id === 'drilo' && <RiverScene variant="portrait" illustration={section.illustration} />}
 
     {section.id === 'historia' && (
       <div class="story-layout">

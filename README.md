@@ -1,6 +1,6 @@
 # Landing del libro
 
-Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido y Wireframe: inventario editorial, borradores y estructura responsive con espacios reservados para imágenes. Todavía no incluye el diseño visual final, animaciones ni servicios externos. El nombre del paquete es un identificador técnico, no confirma el título del libro.
+Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe y Diseño visual: inventario editorial, estructura responsive y propuesta gráfica para la primera pantalla y «Conoce a Drilo». Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
 
@@ -28,11 +28,11 @@ Antes de entregar cambios, ejecutar `npm run check` y `npm run build`. `preview`
 
 ```text
 src/
-  pages/           Rutas; index.astro compone el wireframe desde el contenido
+  pages/           Rutas; index.astro compone la landing desde el contenido
   layouts/         Estructuras compartidas de página
-  components/      Cabecera, secciones, pie y reservas de imagen
+  components/      Cabecera, secciones, pie, escenas y reservas de imagen
   content/         Contratos y contenido editorial centralizado
-  styles/          wireframe.css: jerarquía y distribución responsive provisional
+  styles/          landing.css: variables visuales, lectura y distribución responsive
   assets/images/   Imágenes que Astro procesará al integrarlas
 public/
   fonts/           Fuentes web con licencia
@@ -47,7 +47,7 @@ Los archivos `.gitkeep` conservan carpetas vacías y pueden retirarse al añadir
 
 El inventario, las fuentes, el estado de los datos y los materiales pendientes están en [CONTENIDO.md](CONTENIDO.md). La fuente editable de los textos es [src/content/landing.ts](src/content/landing.ts): exporta `book`, `author` y `landingContent`, con las secciones ordenadas, su visibilidad, los enlaces de compra y los metadatos en borrador.
 
-`src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes reciben estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
+`src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `SectionIllustration`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes reciben estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
 
 El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
 
@@ -69,10 +69,12 @@ Guardar fuentes editables en `design/originals/`; no guardar allí datos sensibl
 
 Colocar las imágenes web en `src/assets/images/` para integrarlas más adelante con las herramientas de imágenes de Astro. Reservar `public/` para archivos que deban copiarse sin procesamiento: todo lo colocado allí será público en una futura publicación. Nombrar archivos en minúsculas y con guiones.
 
-## Wireframe y siguiente fase
+## Diseño visual y siguiente fase
 
-El wireframe móvil y de escritorio se sirve en `/` con `npm run dev`. Usa fuente de sistema, escala de grises y reservas de imagen con etiquetas; no representa el diseño visual definitivo. La composición, la comparación con Contenido y las instrucciones de edición están en [WIREFRAME.md](WIREFRAME.md). El avance de las etapas se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
+La propuesta visual móvil y de escritorio se sirve en `/` con `npm run dev`. La primera pantalla y «Conoce a Drilo» definen paleta, tipografía y orillas curvas. Las demás secciones conservan la composición anterior con una base común de lectura. La dirección, las variables, los recursos y la verificación se documentan en [DISENO-VISUAL.md](DISENO-VISUAL.md). [WIREFRAME.md](WIREFRAME.md) conserva el registro de la fase 2. El avance se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
 
-La siguiente fase es **Diseño visual**: definir la primera pantalla y una sección interior usando materiales autorizados. El wireframe consume `landingContent`, conserva su `noindex` y funciona sin JavaScript. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
+Los estilos se editan en `src/styles/landing.css`. Las fuentes son pilas locales Georgia y Trebuchet MS con alternativas, sin descargas externas. `RiverScene.astro` contiene formas SVG decorativas de apoyo; no recrea a Drilo. Para reemplazar su reserva, añadir `illustration: { src, alt, width, height }` a Inicio o Drilo en `src/content/landing.ts`, con un archivo autorizado y sus dimensiones reales. `book.cover` reemplaza las reservas de portada.
+
+La siguiente fase es **Versión estática**: extender el lenguaje visual al recorrido completo e integrar los materiales autorizados disponibles. La landing consume `landingContent`, conserva su `noindex` y funciona sin JavaScript. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.

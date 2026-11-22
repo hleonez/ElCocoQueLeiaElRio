@@ -11,6 +11,7 @@ const navigation = sections.filter((section) => section.enabled && section.navig
 const home = sections.find((section) => section.enabled);
 ---
 
+<div class="header-surface">
 <header class="site-header container">
   {home ? <a class="site-title" href={`#${home.id}`}>{title}</a> : <span class="site-title">{title}</span>}
   {navigation.length > 0 && (
@@ -27,3 +28,4 @@ const home = sections.find((section) => section.enabled);
     </nav>
   )}
 </header>
+</div>

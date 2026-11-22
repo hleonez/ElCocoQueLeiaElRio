@@ -2,6 +2,8 @@
 
 Entrega de la fase 2, **Wireframe**, de [PLAN-LANDING.md](PLAN-LANDING.md), preparada el **22 de noviembre de 2026**. Se puede recorrer en `/` con `npm run dev`.
 
+**Continuidad:** este documento conserva las decisiones de la fase 2. La ruta `/` ya muestra la fase 3, documentada en [DISENO-VISUAL.md](DISENO-VISUAL.md); `src/styles/landing.css` sustituye a la hoja provisional `wireframe.css`. La estructura de contenido, visibilidad y navegación se mantiene.
+
 La estructura usa los borradores de [CONTENIDO.md](CONTENIDO.md) y [src/content/landing.ts](src/content/landing.ts). El gris, los bordes, la fuente de sistema y las reservas rotuladas permiten revisar tamaños, orden y lectura antes de definir la identidad gráfica. La franja inicial identifica esta vista como una propuesta para revisión.
 
 ## Composición por pantalla

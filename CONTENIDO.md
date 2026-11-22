@@ -59,11 +59,13 @@ La fuente editable de los textos es [src/content/landing.ts](src/content/landing
 | Compra / `libro` | Cierre, aviso para consultar condiciones en tienda y enlace ITA | Habilitado, sin prometer stock ni entregas |
 | Pie / `pie` | Despedida, crédito textual de autoría y edición | Habilitado; derechos y redes se incorporarán cuando se confirmen |
 
-`enabled` expresa la visibilidad en la interfaz, no la aprobación para publicar. El wireframe de `index.astro` ya renderiza las secciones habilitadas y genera la navegación con esos mismos destinos. Las etiquetas del control de movimiento y del juego de letras ya están centralizadas en `controls`; su comportamiento corresponde a la fase Animación.
+`enabled` expresa la visibilidad en la interfaz, no la aprobación para publicar. La propuesta visual de `index.astro` renderiza las secciones habilitadas y genera la navegación con esos mismos destinos. Las etiquetas del control de movimiento y del juego de letras ya están centralizadas en `controls`; su comportamiento corresponde a la fase Animación.
 
 ## Inventario de materiales
 
 Solo hay archivos `.gitkeep` en las carpetas de imágenes y originales. No se recibieron recursos utilizables en el repositorio. Los nombres siguientes son **destinos sugeridos**, no archivos existentes ni rutas activas en los datos.
+
+La fase [Diseño visual](DISENO-VISUAL.md) añade formas de apoyo de río, orillas y hojas como SVG decorativo en `RiverScene.astro`. No representan a Drilo ni sustituyen originales autorizados. Los colores son una propuesta pendiente de contrastar con los materiales. Las fuentes usan pilas locales, sin archivos redistribuidos. Las secciones Inicio y Drilo admiten el campo opcional `illustration` con ruta, texto alternativo y dimensiones reales; permanece sin completar hasta recibir los recursos.
 
 | Recurso | Prioridad y uso | Entrega necesaria / destino sugerido | Alternativa provisional |
 | --- | --- | --- | --- |
