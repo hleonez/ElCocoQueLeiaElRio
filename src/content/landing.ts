@@ -139,13 +139,13 @@ export const landingContent: LandingContent = {
     // Añadir derechos y perfiles solo cuando estén confirmados.
     links: [],
   },
-  // El control de movimiento ya funciona; el juego de letras queda para la fase 5.
+  // Preferencias globales y juego del título, sin alterar el texto editorial.
   controls: {
     enableMotion: 'Activar animaciones',
     disableMotion: 'Desactivar animaciones',
     reducedMotion: 'Movimiento reducido del sistema',
-    tryLetters: 'Probar el juego de letras',
-    letterPlayExplanation: 'Un juego visual sobre las letras y las distintas maneras de aprender.',
+    tryLetters: 'Animar el título',
+    letterPlayExplanation: 'Una onda en las letras, como el agua del río.',
     letterPlayContext:
       'Este efecto es un recurso gráfico y no representa cómo lee una persona con dislexia.',
   },

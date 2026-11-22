@@ -1,6 +1,6 @@
 # Landing del libro
 
-Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe, Diseño visual y Versión estática: inventario editorial, recorrido responsive completo y una primera capa de inmersión vinculada al scroll. Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
+Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe, Diseño visual, Versión estática y Animación con los recursos disponibles: recorrido responsive, título interactivo y escenas vinculadas al scroll. Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
 
@@ -77,8 +77,19 @@ Los estilos se editan en `src/styles/landing.css`. Las fuentes son pilas locales
 
 La fase **Versión estática** extiende el lenguaje visual al recorrido completo. [VERSION-ESTATICA.md](VERSION-ESTATICA.md) documenta la entrega, los controles y la verificación. Historia contiene un río decorativo cuya hoja y trazo avanzan con el scroll; en escritorio amplio la escena permanece visible durante los tres momentos. Los textos nunca se ocultan. En móvil, ventanas bajas, movimiento reducido o animaciones desactivadas, la escena sigue el flujo normal.
 
-`src/styles/motion.css` añade animaciones CSS progresivas, sin GSAP ni listeners de scroll. `src/scripts/motion.ts` solo sincroniza los controles de cabecera y pie y guarda la preferencia local cuando es posible. Navegadores sin soporte de timelines conservan la composición estática y no muestran controles inoperantes. La landing consume `landingContent`, conserva su `noindex` y permite leer, navegar y consultar la tienda sin JavaScript.
+La fase **Animación** añade una onda al pasar el puntero por el título principal y un botón «Animar el título» para teclado y toque. Las palabras del título derivan al recorrer la primera pantalla; el resto de los textos permanece estático. El scroll también mueve las capas del río y la portada, dibuja el avance de Historia y acompaña la llegada a compra y al pie. El detalle y las pruebas están en [ANIMACIONES.md](ANIMACIONES.md).
 
-La siguiente fase es **Animación**: completar el viaje del personaje cuando existan sus originales autorizados y el juego de letras contextualizado. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
+`src/styles/motion.css` contiene las timelines CSS, sin GSAP ni listeners de scroll. `src/scripts/motion.ts` sincroniza los controles y guarda la preferencia local; `title-motion.ts` gestiona la onda con Web Animations API. Sin soporte de timelines, el recorrido conserva su composición estática y el juego manual del título puede funcionar de forma independiente. Sin JavaScript se ocultan los controles y se puede leer, navegar y consultar ITA. Movimiento reducido y el control general cancelan todos los efectos.
+
+La siguiente fase es **Validación**. Antes del lanzamiento habrá que integrar los originales autorizados, confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
+
+La prueba de regresión de movimiento está en `scripts/verify-motion.py`. Requiere Python, Playwright y Edge instalado; ejecutarla contra la compilación servida localmente. Las dependencias de prueba no forman parte de la web:
+
+```sh
+python -m pip install playwright
+python scripts/verify-motion.py --url http://localhost:4324
+```
+
+El servidor de prueba puede iniciarse, después de `npm run build`, con `python -m http.server 4324 --bind 127.0.0.1 --directory dist`. Las capturas se guardan en `.qa/fase5/`; `--screenshots` permite elegir otro destino. Las pruebas comprueban interacciones, reversibilidad del scroll, preferencias, lectura sin JavaScript y distribución responsive.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.

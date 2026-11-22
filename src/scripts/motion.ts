@@ -1,6 +1,10 @@
-/** CSS owns the scroll timelines; JavaScript only manages the visitor's preference. */
+import { initTitleMotion } from './title-motion';
+
+/** CSS owns scrolling; JavaScript manages preferences and the title's manual wave. */
 export function initMotionControls() {
-  if (!CSS.supports('animation-timeline: view()') || !CSS.supports('animation-range: contain')) return;
+  const titleMotion = initTitleMotion();
+  const supportsScroll = CSS.supports('animation-timeline: view()') && CSS.supports('animation-range: contain');
+  if (!supportsScroll && !titleMotion.available) return;
 
   const controls = document.querySelectorAll<HTMLButtonElement>('[data-motion-control]');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -11,6 +15,7 @@ export function initMotionControls() {
   function update() {
     const active = enabled && !reduced.matches;
     document.documentElement.dataset.motion = active ? 'on' : 'off';
+    titleMotion.setEnabled(active);
     controls.forEach((button) => {
       button.hidden = false;
       button.disabled = reduced.matches;

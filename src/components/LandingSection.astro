@@ -3,6 +3,7 @@ import type { LandingContent, LandingSection } from '../content/types';
 import ImagePlaceholder from './ImagePlaceholder.astro';
 import RiverScene from './RiverScene.astro';
 import RiverJourney from './RiverJourney.astro';
+import AnimatedTitle from './AnimatedTitle.astro';
 
 interface Props {
   section: LandingSection;
@@ -26,7 +27,7 @@ const editions = book.editions?.filter((edition) =>
   <div class="container section-layout">
     <div class="section-copy">
       {section.id === 'inicio'
-        ? <h1 id={`${section.id}-titulo`}>{section.heading}</h1>
+        ? <AnimatedTitle id={`${section.id}-titulo`} title={section.heading} controls={content.controls} />
         : <h2 id={`${section.id}-titulo`}>{section.heading}</h2>}
       {section.id === 'inicio' && <p class="byline">Un cuento de {book.author}</p>}
       {!showMoments && section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}

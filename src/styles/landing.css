@@ -1,4 +1,4 @@
-/* Fase 4: recorrido completo, sobre la dirección visual de la fase 3. */
+/* Recorrido completo: dirección visual de fase 3 y movimiento progresivo de fase 5. */
 :root {
   --ink: #203b32;
   --forest: #244e3b;
@@ -30,6 +30,14 @@ h1, h2, h3, p, figure { margin: 0; }
 h1, h2, h3 { text-wrap: balance; }
 h1, h2 { font-family: var(--font-display); font-weight: 700; color: var(--forest); }
 h1 { font-size: clamp(2.75rem, 6.5vw, 5.75rem); line-height: 1.03; letter-spacing: -0.045em; max-width: 11ch; }
+.animated-title__word { display: inline-block; }
+.animated-title__letter { display: inline-block; }
+.title-motion-tools { margin-top: 1rem; }
+.title-motion-tools[hidden] { display: none; }
+.title-motion-trigger { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.35rem 0; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: var(--forest); font: inherit; font-size: 0.875rem; cursor: pointer; }
+.title-motion-trigger:disabled { cursor: default; border-bottom-style: dotted; }
+.title-motion-hint { margin-top: 0.25rem; font-size: 0.875rem; line-height: 1.5; }
+.journey-progress { display: none; }
 h2 { font-size: clamp(2.125rem, 4vw, 3.5rem); line-height: 1.12; letter-spacing: -0.035em; max-width: 22ch; }
 h3 { font-size: 1.25rem; line-height: 1.35; }
 p { max-width: 62ch; }
@@ -97,6 +105,7 @@ li, p, dd, a, .image-placeholder { overflow-wrap: anywhere; }
 .story-moments { display: grid; gap: 2rem; list-style: none; margin: 0; padding: 0; }
 .story-moment { position: relative; padding: 1.5rem 0 1.5rem 1.75rem; border-left: 2px solid #477b72; }
 .story-moment::before { content: ''; position: absolute; top: 1.9rem; left: -0.4rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--forest); }
+.story-moment::after { content: ''; position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--scarf); transform-origin: top; transform: scaleY(0); }
 .story-moment h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2.125rem); line-height: 1.2; }
 .story-moments h3 + p { margin-top: 0.75rem; }
 .river-journey { position: relative; width: min(100%, 30rem); margin-inline: auto; }
