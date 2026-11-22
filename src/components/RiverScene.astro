@@ -1,0 +1,33 @@
+---
+import type { SectionIllustration } from '../content/types';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  variant?: 'hero' | 'portrait';
+  illustration?: SectionIllustration;
+}
+
+const { variant = 'hero', illustration } = Astro.props;
+---
+
+<div class:list={['river-scene', `river-scene--${variant}`]}>
+  <!-- Formas de apoyo provisionales: no representan al personaje ni al interior del libro. -->
+  <svg class="river-scene__landscape" viewBox="0 0 720 600" fill="none" aria-hidden="true" focusable="false">
+    <path class="river-scene__bank" d="M88 116C162 34 361 15 520 67c119 39 186 138 170 258-12 97-91 200-222 228-151 32-345 6-402-107C17 349 19 193 88 116Z" />
+    <path class="river-scene__water" d="M41 363c117-86 201-72 315-15 123 62 220-76 335-19 3 108-75 196-223 224-151 32-345 6-402-107-13-25-20-53-25-83Z" />
+    <g class="river-scene__ripples" stroke-width="3" stroke-linecap="round">
+      <path d="M105 421c36-12 64-12 94-2m204 49c49-16 98-17 141-4M241 508c29-6 59-7 82-2M529 380c22-9 44-11 67-8" />
+    </g>
+    <g class="river-scene__reeds">
+      <path d="M91 388c-27-42-30-73-16-111 22 36 29 72 16 111Z" />
+      <path d="M95 387c5-43 23-66 56-77-5 36-25 61-56 77Zm511-84c-11-40-5-70 20-94 9 38 2 68-20 94Z" />
+      <path d="M607 305c17-34 41-49 73-46-18 31-41 47-73 46Z" />
+    </g>
+    <path class="river-scene__sun" d="M530 124c-3-27 36-41 51-18 17 26-9 55-34 42-10-5-16-13-17-24Z" />
+  </svg>
+  <div class="river-scene__character">
+    {illustration
+      ? <img src={illustration.src} alt={illustration.alt} width={illustration.width} height={illustration.height} loading={variant === 'hero' ? 'eager' : 'lazy'} />
+      : <ImagePlaceholder label="Espacio para la ilustración original de Drilo" />}
+  </div>
+</div>

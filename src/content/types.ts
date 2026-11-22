@@ -69,6 +69,14 @@ export interface StoryMoment {
   text: string;
 }
 
+/** Ilustración original autorizada, con dimensiones reales para reservar su espacio. */
+export interface SectionIllustration {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 /** El orden del arreglo define el recorrido. El menú deberá usar solo secciones habilitadas. */
 export interface LandingSection {
   id: SectionId;
@@ -80,6 +88,7 @@ export interface LandingSection {
   secondaryAction?: SectionAction;
   moments?: StoryMoment[];
   questions?: string[];
+  illustration?: SectionIllustration;
 }
 
 /** Añadir únicamente imágenes disponibles y autorizadas para la web. */
