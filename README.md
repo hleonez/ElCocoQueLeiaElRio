@@ -1,6 +1,6 @@
 # Landing del libro
 
-Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe y Diseño visual: inventario editorial, estructura responsive y propuesta gráfica para la primera pantalla y «Conoce a Drilo». Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
+Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe, Diseño visual y Versión estática: inventario editorial, recorrido responsive completo y una primera capa de inmersión vinculada al scroll. Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
 
@@ -71,10 +71,14 @@ Colocar las imágenes web en `src/assets/images/` para integrarlas más adelante
 
 ## Diseño visual y siguiente fase
 
-La propuesta visual móvil y de escritorio se sirve en `/` con `npm run dev`. La primera pantalla y «Conoce a Drilo» definen paleta, tipografía y orillas curvas. Las demás secciones conservan la composición anterior con una base común de lectura. La dirección, las variables, los recursos y la verificación se documentan en [DISENO-VISUAL.md](DISENO-VISUAL.md). [WIREFRAME.md](WIREFRAME.md) conserva el registro de la fase 2. El avance se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
+La propuesta visual móvil y de escritorio se sirve en `/` con `npm run dev`. La primera pantalla y «Conoce a Drilo» definen paleta, tipografía y orillas curvas; la fase 4 las extiende a todo el recorrido. La dirección original y sus variables se documentan en [DISENO-VISUAL.md](DISENO-VISUAL.md). [WIREFRAME.md](WIREFRAME.md) conserva el registro de la fase 2. El avance se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
 
 Los estilos se editan en `src/styles/landing.css`. Las fuentes son pilas locales Georgia y Trebuchet MS con alternativas, sin descargas externas. `RiverScene.astro` contiene formas SVG decorativas de apoyo; no recrea a Drilo. Para reemplazar su reserva, añadir `illustration: { src, alt, width, height }` a Inicio o Drilo en `src/content/landing.ts`, con un archivo autorizado y sus dimensiones reales. `book.cover` reemplaza las reservas de portada.
 
-La siguiente fase es **Versión estática**: extender el lenguaje visual al recorrido completo e integrar los materiales autorizados disponibles. La landing consume `landingContent`, conserva su `noindex` y funciona sin JavaScript. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
+La fase **Versión estática** extiende el lenguaje visual al recorrido completo. [VERSION-ESTATICA.md](VERSION-ESTATICA.md) documenta la entrega, los controles y la verificación. Historia contiene un río decorativo cuya hoja y trazo avanzan con el scroll; en escritorio amplio la escena permanece visible durante los tres momentos. Los textos nunca se ocultan. En móvil, ventanas bajas, movimiento reducido o animaciones desactivadas, la escena sigue el flujo normal.
+
+`src/styles/motion.css` añade animaciones CSS progresivas, sin GSAP ni listeners de scroll. `src/scripts/motion.ts` solo sincroniza los controles de cabecera y pie y guarda la preferencia local cuando es posible. Navegadores sin soporte de timelines conservan la composición estática y no muestran controles inoperantes. La landing consume `landingContent`, conserva su `noindex` y permite leer, navegar y consultar la tienda sin JavaScript.
+
+La siguiente fase es **Animación**: completar el viaje del personaje cuando existan sus originales autorizados y el juego de letras contextualizado. Antes del lanzamiento habrá que confirmar los pendientes editoriales y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.

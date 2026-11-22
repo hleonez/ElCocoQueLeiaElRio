@@ -10,10 +10,10 @@ const enabledIds = new Set(sections.map((section) => section.id));
 ---
 
 <LandingLayout seo={landingContent.seo}>
-  <LandingHeader title={landingContent.book.title} sections={sections} />
+  <LandingHeader title={landingContent.book.title} sections={sections} controls={landingContent.controls} />
   <main id="contenido" tabindex="-1">
     {!enabledIds.has('inicio') && <h1 class="container fallback-title">{landingContent.book.title}</h1>}
     {sections.map((section) => <LandingSection section={section} content={landingContent} enabledIds={enabledIds} />)}
   </main>
-  <LandingFooter footer={landingContent.footer} />
+  <LandingFooter footer={landingContent.footer} controls={landingContent.controls} />
 </LandingLayout>

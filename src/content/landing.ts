@@ -4,7 +4,7 @@ import type { Author, Book, LandingContent } from './types';
  * Borradores de la fase Contenido, no fragmentos del cuento.
  * Consultar CONTENIDO.md antes de aprobar textos, añadir recursos o publicar.
  * La propuesta visual de index.astro consume estos datos y respeta enabled y el orden.
- * Añadir illustration a Inicio o Drilo solo al recibir los originales autorizados.
+ * Añadir illustration a Inicio, Drilo o Historia solo al recibir los originales autorizados.
  */
 const itaProductUrl = 'https://itabooks.com/producto/el-coco-que-leia-en-el-rio/';
 
@@ -139,10 +139,11 @@ export const landingContent: LandingContent = {
     // Añadir derechos y perfiles solo cuando estén confirmados.
     links: [],
   },
-  // Son etiquetas para la fase de Animación; todavía no crean controles.
+  // El control de movimiento ya funciona; el juego de letras queda para la fase 5.
   controls: {
     enableMotion: 'Activar animaciones',
     disableMotion: 'Desactivar animaciones',
+    reducedMotion: 'Movimiento reducido del sistema',
     tryLetters: 'Probar el juego de letras',
     letterPlayExplanation: 'Un juego visual sobre las letras y las distintas maneras de aprender.',
     letterPlayContext:

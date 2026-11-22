@@ -2,6 +2,7 @@
 import type { LandingContent, LandingSection } from '../content/types';
 import ImagePlaceholder from './ImagePlaceholder.astro';
 import RiverScene from './RiverScene.astro';
+import RiverJourney from './RiverJourney.astro';
 
 interface Props {
   section: LandingSection;
@@ -53,11 +54,11 @@ const editions = book.editions?.filter((edition) =>
 
     {section.id === 'historia' && (
       <div class="story-layout">
-        <ImagePlaceholder label="Escena de Drilo en el río" />
+        <RiverJourney illustration={section.illustration} />
         {showMoments && (
           <ol class="story-moments">
             {section.moments?.map((moment) => (
-              <li>
+              <li class="story-moment">
                 <h3>{moment.heading}</h3>
                 <p>{moment.text}</p>
               </li>

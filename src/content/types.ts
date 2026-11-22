@@ -120,6 +120,7 @@ export interface LandingContent {
   controls: {
     enableMotion: string;
     disableMotion: string;
+    reducedMotion: string;
     tryLetters: string;
     letterPlayExplanation: string;
     letterPlayContext: string;

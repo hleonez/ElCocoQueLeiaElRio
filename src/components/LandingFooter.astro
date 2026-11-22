@@ -1,11 +1,13 @@
 ---
 import type { LandingContent } from '../content/types';
+import MotionControl from './MotionControl.astro';
 
 interface Props {
   footer: LandingContent['footer'];
+  controls: LandingContent['controls'];
 }
 
-const { footer } = Astro.props;
+const { footer, controls } = Astro.props;
 ---
 
 {footer.enabled && (
@@ -19,6 +21,7 @@ const { footer } = Astro.props;
           {footer.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
         </ul>
       )}
+      <MotionControl controls={controls} />
     </div>
   </footer>
 )}

@@ -1,0 +1,46 @@
+/* Progressive enhancement: the complete composition above is the static fallback.
+   No scroll handlers, hidden paragraphs, time-based loops or forced scrolling. */
+@keyframes river-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes river-leaf {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+@keyframes river-current { from { transform: translateX(-8px); } to { transform: translateX(10px); } }
+@keyframes river-reeds { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+
+@supports (animation-timeline: view()) and (animation-range: contain) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not([data-motion='off']) .story-layout { view-timeline: --story block; }
+    :root:not([data-motion='off']) .river-journey__trail {
+      animation: river-trace 1s linear both;
+      /* Keep this separate: CSS minifiers can fold it into a newer shorthand
+         that older timeline-capable browsers do not understand. */
+      animation-timeline: --story !important;
+      animation-range: contain;
+    }
+    :root:not([data-motion='off']) .river-journey__leaf {
+      transform: none;
+      offset-path: path('M218 44C500 100 498 220 300 260S44 418 250 450 510 590 330 676');
+      offset-anchor: 0px 0px;
+      offset-rotate: auto 45deg;
+      animation: river-leaf 1s linear both;
+      animation-timeline: --story !important;
+      animation-range: contain;
+    }
+    :root:not([data-motion='off']) .river-scene { view-timeline: --scene block; }
+    :root:not([data-motion='off']) .river-scene__ripples {
+      animation: river-current 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 15% exit 85%;
+    }
+    :root:not([data-motion='off']) .river-scene__reeds {
+      transform-origin: 50% 75%;
+      animation: river-reeds 1s linear both;
+      animation-timeline: --scene !important;
+      animation-range: entry 15% exit 85%;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-width: 64rem) and (min-height: 42rem) {
+    :root:not([data-motion='off']) .river-journey { position: sticky; top: max(2rem, calc((100svh - 36rem) / 2)); }
+  }
+}
