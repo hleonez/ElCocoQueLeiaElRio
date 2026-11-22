@@ -1,6 +1,6 @@
 # Landing del libro
 
-Base técnica con Astro, TypeScript estricto y generación estática. Todavía no incluye diseño, secciones comerciales, animaciones ni servicios externos. El nombre del paquete es un identificador técnico, no confirma el título del libro.
+Base técnica con Astro, TypeScript estricto y generación estática. La fase Contenido está preparada: inventario editorial, borradores y campos pendientes. Todavía no incluye diseño, secciones comerciales renderizadas, animaciones ni servicios externos. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
 
@@ -31,7 +31,7 @@ src/
   pages/           Rutas; index.astro es la página inicial provisional
   layouts/         Estructuras compartidas de página
   components/      Secciones y elementos reutilizables futuros
-  content/         Tipos y futuros archivos de contenido
+  content/         Contratos y contenido editorial centralizado
   styles/          Futuros tokens visuales y estilos globales
   assets/images/   Imágenes que Astro procesará al integrarlas
 public/
@@ -45,7 +45,11 @@ Los archivos `.gitkeep` conservan carpetas vacías y pueden retirarse al añadir
 
 ## Contenido
 
-`src/content/types.ts` define los contratos iniciales `Book`, `Author`, `ExternalLink`, `PurchaseLink` y `PhysicalStore`. Crear después archivos TypeScript en `src/content/` con datos reales y comprobarlos con `satisfies` y el tipo correspondiente. Los componentes recibirán los datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
+El inventario, las fuentes, el estado de los datos y los materiales pendientes están en [CONTENIDO.md](CONTENIDO.md). La fuente editable de los textos es [src/content/landing.ts](src/content/landing.ts): exporta `book`, `author` y `landingContent`, con las secciones ordenadas, su visibilidad, los enlaces de compra y los metadatos en borrador.
+
+`src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes futuros recibirán estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
+
+El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú futuro deberá excluir secciones con `enabled: false`.
 
 No se incluyen datos de ejemplo ni testimonios ficticios. No hace falta CMS ni base de datos para mantener estos archivos. Los tipos comprueban la estructura durante el desarrollo; no validan la existencia de enlaces ni datos externos.
 
@@ -67,6 +71,8 @@ Colocar las imágenes web en `src/assets/images/` para integrarlas más adelante
 
 ## Siguiente fase
 
-Validar el brief y aprobar el diseño antes de implementar la landing. La página actual es únicamente una comprobación técnica, sin estilos, y lleva `noindex` para evitar indexarla accidentalmente. Al preparar el lanzamiento habrá que sustituirla, retirar ese `noindex` y configurar dominio, metadatos, recursos sociales y sitemap.
+Construir el wireframe móvil y de escritorio a partir del contenido preparado y los espacios reservados para materiales faltantes. El avance de las etapas se registra en [PLAN-LANDING.md](PLAN-LANDING.md).
+
+La página actual es únicamente una comprobación técnica, sin estilos, y todavía no consume `landingContent`. Lleva `noindex` para evitar indexarla accidentalmente. Antes del lanzamiento habrá que confirmar los pendientes editoriales, sustituir la página provisional y configurar dominio, metadatos, recursos sociales y sitemap antes de retirar `noindex`.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.

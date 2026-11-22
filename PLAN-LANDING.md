@@ -193,11 +193,13 @@ La primera versión incluirá el recorrido, los enlaces externos y la estructura
 - Pasan `npm run check` y `npm run build`.
 - Se preparan los metadatos y la imagen para compartir antes de retirar el `noindex` de la base actual.
 
-Este entregable define la estructura y el comportamiento propuestos. La landing todavía no se ha implementado ni publicado.
+Este documento define la estructura y el comportamiento propuestos. La fase **Contenido** quedó preparada el **22 de noviembre de 2026**: [inventario, fuentes y pendientes](CONTENIDO.md), [borradores y datos editables](src/content/landing.ts) y [contratos de contenido](src/content/types.ts). Los textos siguen sujetos a revisión editorial; completar esta fase no confirma el título ni autoriza los materiales pendientes. Se verificaron `npm run check` y `npm run build`.
+
+La siguiente fase es **Wireframe**. La página pública sigue siendo la base técnica provisional con `noindex`; todavía no renderiza la landing ni se ha publicado.
 
 **Checklist de fases**
 
-- [ ] Contenido
+- [x] Contenido
 - [ ] Wireframe
 - [ ] Diseño visual
 - [ ] Versión estática
