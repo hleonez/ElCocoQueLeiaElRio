@@ -49,7 +49,7 @@ El inventario, las fuentes, el estado de los datos y los materiales pendientes e
 
 `src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `SectionIllustration`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes reciben estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
 
-El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
+El título está confirmado en el original compartido en Drive. La biografía y los textos se adaptaron de los archivos de la autora (ver CONTENIDO.md). Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. La sección Autora está habilitada sin retrato; Interiores sigue desactivada. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
 
 No se incluyen datos de ejemplo ni testimonios ficticios. No hace falta CMS ni base de datos para mantener estos archivos. Los tipos comprueban la estructura durante el desarrollo; no validan la existencia de enlaces ni datos externos.
 

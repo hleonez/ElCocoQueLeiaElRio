@@ -26,7 +26,9 @@ export interface BookEdition {
 
 export interface Author {
   name: string;
+  role?: string;
   biography: string;
+  creativeNote?: { heading: string; text: string };
   photo?: string;
   links: ExternalLink[];
 }
@@ -83,6 +85,7 @@ export interface LandingSection {
   enabled: boolean;
   heading: string;
   paragraphs: string[];
+  quote?: { text: string; attribution: string };
   navigationLabel?: string;
   primaryAction?: SectionAction;
   secondaryAction?: SectionAction;

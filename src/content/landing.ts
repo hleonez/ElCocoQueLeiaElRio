@@ -1,21 +1,22 @@
 import type { Author, Book, LandingContent } from './types';
 
 /**
- * Borradores de la fase Contenido, no fragmentos del cuento.
- * Consultar CONTENIDO.md antes de aprobar textos, añadir recursos o publicar.
+ * Contenido adaptado del cuento y la biografía compartidos en Drive.
+ * Solo quote contiene una cita literal; el resto es redacción para la landing.
+ * Consultar CONTENIDO.md para las fuentes y el límite de spoilers.
  * La propuesta visual de index.astro consume estos datos y respeta enabled y el orden.
  * Añadir illustration a Inicio, Drilo o Historia solo al recibir los originales autorizados.
  */
 const itaProductUrl = 'https://itabooks.com/producto/el-coco-que-leia-en-el-rio/';
 
 export const book: Book = {
-  // Título provisional del plan; confirmar su diferencia con la ficha de ITA.
+  // Título confirmado en el PDF de la autora; ITA usa otra variante en su URL.
   title: 'El coco que leía el río',
   author: 'Laura Londoño',
   synopsis:
-    'Entender las señales del río es un reto para Drilo. Las burlas de su hermano lo hacen dudar, pero su abuela le ofrece otra mirada: aprender puede tomar caminos distintos.',
+    'Drilo vive con su familia en un gran río. Leer sus señales le cuesta, y las burlas de su hermano lo hacen sentirse pequeño. Pero su abuela lo escucha y le recuerda que hay muchas formas de aprender…',
   seoDescription:
-    'Conoce a Drilo en El coco que leía el río, un cuento de Laura Londoño para compartir y conversar sobre la empatía y las distintas maneras de aprender.',
+    'El coco que leía el río, escrito e ilustrado por Laura Londoño. Conoce a Drilo en un cuento sobre la empatía, la diversidad y la confianza en uno mismo. Desde los 5 años.',
   editions: [
     {
       id: 'ita-impresa',
@@ -31,10 +32,15 @@ export const book: Book = {
 };
 
 export const author: Author = {
-  name: book.author,
-  // Adaptación de la reseña de Alianza Francesa; pendiente de revisión de Laura.
+  name: 'Laura Londoño Ospina',
+  role: 'Autora e ilustradora',
+  // Adaptación de Biografia.docx; sin convertir su situación académica de 2025 en un dato actual.
   biography:
-    'Laura Londoño Ospina nació en Barranquilla, Colombia. Su camino creativo parte del dibujo y el diseño gráfico. Con este cuento, lleva su interés por la ilustración al mundo de las historias para niños.',
+    'Laura nació en Barranquilla, Colombia. Desde pequeña le ha gustado dibujar y crear; ese amor por el arte la llevó a estudiar Diseño Gráfico. Ha trabajado en proyectos como La Tiendita del Stickers y ha compartido su arte en distintas ferias.',
+  creativeNote: {
+    heading: 'Un sueño que tomó forma de cuento',
+    text: 'Ilustrar para niños era uno de sus grandes sueños. En El coco que leía el río, Laura reúne sus palabras y sus dibujos para darle vida a Drilo y al mundo que lo rodea.',
+  },
   links: [],
 };
 
@@ -58,7 +64,10 @@ export const landingContent: LandingContent = {
       id: 'inicio',
       enabled: true,
       heading: book.title,
-      paragraphs: ['Conoce a Drilo, un pequeño cocodrilo que aprende a su propio ritmo.'],
+      paragraphs: [
+        'En el río de Drilo hay muchas señales por leer… y muchas formas de aprender.',
+        'Un cuento para compartir desde los 5 años, sobre la empatía, la diversidad y la confianza en uno mismo.',
+      ],
       primaryAction: { label: 'Encuentra el libro', target: 'libro' },
       secondaryAction: { label: 'Conoce a Drilo', target: 'drilo' },
     },
@@ -67,7 +76,8 @@ export const landingContent: LandingContent = {
       enabled: true,
       heading: 'Conoce a Drilo',
       paragraphs: [
-        'Lo que otros cocodrilos entienden con facilidad, a Drilo le cuesta un poco más. A su lado, nos acercamos a las dudas que aparecen cuando aprender no resulta tan sencillo.',
+        'Drilo es un joven cocodrilo. Vive en un gran río con su familia y va a la escuela con otros pequeños animales.',
+        'Pero, cuando intenta leer, las letras parecen cambiar de lugar. Lo que para sus hermanos resulta fácil, a él lo confunde. ¿Alguna vez te has sentido así al aprender algo nuevo?',
       ],
     },
     {
@@ -80,15 +90,15 @@ export const landingContent: LandingContent = {
       moments: [
         {
           heading: 'Un río por entender',
-          text: 'Las señales del río no son igual de claras para todos. Drilo intenta comprenderlas.',
+          text: 'En la escuela del río, la maestra Morla enseña a leer las señales y a escribir en el lodo. Drilo lo intenta, pero las letras lo confunden.',
         },
         {
           heading: 'Alguien que acompaña',
-          text: 'Frente a las burlas, su abuela le recuerda que no hay una sola manera de aprender.',
+          text: 'No todos entienden por qué le cuesta tanto. Su abuela, en cambio, lo escucha sin juzgar. Bajo la sombra de un manglar, hay tiempo para hablar.',
         },
         {
-          heading: 'Una pregunta para seguir',
-          text: '¿Qué cambiaría si miráramos lo que nos cuesta con más paciencia? Acompaña a Drilo a descubrirlo.',
+          heading: 'Muchas formas de aprender',
+          text: 'Las palabras de su abuela le hacen compañía. ¿Habrá otra manera de acercarse a las señales del río? Sigue a Drilo entre las páginas del cuento.',
         },
       ],
     },
@@ -102,22 +112,26 @@ export const landingContent: LandingContent = {
     {
       id: 'proposito',
       enabled: true,
-      heading: 'Cada quien aprende a su ritmo',
+      heading: 'Hay muchas formas de aprender',
       paragraphs: [
-        'Un cuento para compartir y abrir conversaciones sobre la empatía y las distintas maneras de aprender.',
-        'Después de leer, podemos hacer una pausa para escuchar cómo vive cada persona sus propios retos.',
+        'A veces, algo que parece sencillo para los demás nos cuesta un poco más. La historia de Drilo invita a hacer una pausa, escuchar y tratar con cariño esas diferencias.',
+        'Para leer en familia o en el aula, y dejar que cada pequeño lector encuentre sus propias preguntas.',
       ],
+      quote: {
+        text: 'No todos leemos las señales del río de la misma manera, Drilo',
+        attribution: 'La abuela de Drilo · El coco que leía el río',
+      },
       questions: [
-        '¿Cómo crees que se siente Drilo cuando algo le cuesta?',
-        '¿Qué te ayuda cuando estás aprendiendo algo nuevo?',
-        '¿Cómo podemos acompañar a alguien sin compararlo con los demás?',
+        '¿Cómo te sientes cuando algo que estás aprendiendo te cuesta?',
+        '¿Quién te escucha y te acompaña cuando lo necesitas?',
+        '¿Qué podrías hacer para que un amigo se sienta acompañado al leer?',
       ],
     },
     {
       id: 'autora',
-      enabled: false,
+      enabled: true,
       navigationLabel: 'Autora',
-      heading: 'La persona detrás de Drilo',
+      heading: author.name,
       paragraphs: [author.biography],
     },
     {
@@ -126,7 +140,7 @@ export const landingContent: LandingContent = {
       navigationLabel: 'Dónde conseguirlo',
       heading: 'Llévate a Drilo contigo',
       paragraphs: [
-        'Encuentra una historia para leer en compañía y seguir conversando después de la última página.',
+        'Abre el cuento y acompaña a Drilo. Entre el agua, el lodo y la sombra del manglar, hay una historia para leer juntos y conversar con calma.',
         'Consulta el precio, la disponibilidad y las condiciones de envío directamente en la tienda.',
       ],
     },
@@ -135,7 +149,7 @@ export const landingContent: LandingContent = {
     id: 'pie',
     enabled: true,
     farewell: 'Nos vemos al otro lado del río',
-    credits: 'Una historia de Laura Londoño. Edición impresa de ITA.',
+    credits: 'Texto e ilustraciones de Laura Londoño Ospina. Edición impresa de ITA.',
     // Añadir derechos y perfiles solo cuando estén confirmados.
     links: [],
   },

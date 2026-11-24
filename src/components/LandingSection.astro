@@ -26,11 +26,18 @@ const editions = book.editions?.filter((edition) =>
 <section id={section.id} class:list={['landing-section', `section--${section.id}`]} aria-labelledby={`${section.id}-titulo`}>
   <div class="container section-layout">
     <div class="section-copy">
+      {section.id === 'autora' && author.role && <p class="author-role">{author.role}</p>}
       {section.id === 'inicio'
         ? <AnimatedTitle id={`${section.id}-titulo`} title={section.heading} controls={content.controls} />
         : <h2 id={`${section.id}-titulo`}>{section.heading}</h2>}
       {section.id === 'inicio' && <p class="byline">Un cuento de {book.author}</p>}
       {!showMoments && section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {section.quote && (
+        <figure class="book-quote">
+          <blockquote><p>«{section.quote.text}»</p></blockquote>
+          <figcaption>{section.quote.attribution}</figcaption>
+        </figure>
+      )}
       {actions.length > 0 && (
         <div class="actions">
           {actions.map((action, index) => action && (
@@ -92,7 +99,12 @@ const editions = book.editions?.filter((edition) =>
     {section.id === 'autora' && (
       <div class="author-details">
         {author.photo && <img class="author-photo" src={author.photo} alt={author.name} loading="lazy" />}
-        <p class="author-name">{author.name}</p>
+        {author.creativeNote && (
+          <div class="author-note">
+            <h3>{author.creativeNote.heading}</h3>
+            <p>{author.creativeNote.text}</p>
+          </div>
+        )}
         {author.links.length > 0 && (
           <ul class="external-links">
             {author.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
