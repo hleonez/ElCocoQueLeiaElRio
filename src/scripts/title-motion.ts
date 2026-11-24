@@ -1,9 +1,7 @@
 /** A single, reversible wave. Never replace characters or change their layout. */
 export function initTitleMotion() {
   const title = document.querySelector<HTMLElement>('[data-animated-title]');
-  const tools = document.querySelector<HTMLElement>('[data-title-tools]');
-  const trigger = tools?.querySelector<HTMLButtonElement>('[data-title-trigger]');
-  const available = Boolean(title && tools && trigger && typeof title.animate === 'function');
+  const available = Boolean(title && typeof title.animate === 'function');
   let enabled = false;
   let animations: Animation[] = [];
 
@@ -33,14 +31,12 @@ export function initTitleMotion() {
     });
   }
 
-  if (available && title && trigger) {
+  if (available && title) {
     title.addEventListener('pointerenter', (event) => {
       if (event.pointerType === 'mouse' && window.matchMedia('(hover: hover)').matches) play();
     });
     title.addEventListener('pointerleave', cancel);
     title.addEventListener('pointercancel', cancel);
-    trigger.addEventListener('click', play);
-    trigger.addEventListener('blur', cancel);
     document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); });
   }
 
@@ -48,10 +44,6 @@ export function initTitleMotion() {
     available,
     setEnabled(active: boolean) {
       enabled = available && active;
-      if (tools && trigger && available) {
-        tools.hidden = false;
-        trigger.disabled = !enabled;
-      }
       if (!enabled) cancel();
     },
   };

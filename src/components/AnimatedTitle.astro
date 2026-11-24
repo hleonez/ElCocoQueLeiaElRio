@@ -1,13 +1,10 @@
 ---
-import type { LandingContent } from '../content/types';
-
 interface Props {
   id: string;
   title: string;
-  controls: LandingContent['controls'];
 }
 
-const { id, title, controls } = Astro.props;
+const { id, title } = Astro.props;
 // Keep real text and spaces: selection, copying and the accessible name stay intact.
 const words = title.split(/(\s+)/);
 ---
@@ -19,12 +16,3 @@ const words = title.split(/(\s+)/);
         {Array.from(word).map((letter) => <span class="animated-title__letter">{letter}</span>)}
       </span>)}</span>
 </h1>
-<div class="title-motion-tools" data-title-tools hidden>
-  <button class="title-motion-trigger" type="button" data-title-trigger aria-controls={id} aria-describedby={`${id}-juego`}>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-      <path d="M3 12c3-6 6 6 9 0s6 6 9 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </svg>
-    {controls.tryLetters}
-  </button>
-  <p id={`${id}-juego`} class="title-motion-hint">{controls.letterPlayExplanation}</p>
-</div>

@@ -149,13 +149,6 @@ export const landingContent: LandingContent = {
     // Añadir derechos y perfiles solo cuando estén confirmados.
     links: [],
   },
-  // Juego del título; el movimiento general sigue la preferencia del sistema.
-  controls: {
-    tryLetters: 'Animar el título',
-    letterPlayExplanation: 'Una onda en las letras, como el agua del río.',
-    letterPlayContext:
-      'Este efecto es un recurso gráfico y no representa cómo lee una persona con dislexia.',
-  },
   seo: {
     title: `${book.title} | ${book.author}`,
     description: book.seoDescription,

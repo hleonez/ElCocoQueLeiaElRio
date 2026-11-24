@@ -2,7 +2,7 @@
 
 ## Actualización · 24 de noviembre de 2026
 
-Por solicitud del usuario se retiraron los botones globales de cabecera y pie. El movimiento se activa por defecto, sin consultar ni escribir `localStorage`; una preferencia antigua de los controles retirados no lo desactiva. Se conserva `prefers-reduced-motion` del sistema y la cancelación de la onda si cambia. El inicio del movimiento se carga desde `LandingLayout.astro`, independiente de los botones retirados. El botón «Animar el título» sigue disponible.
+Por solicitud del usuario se retiraron los botones globales de cabecera y pie. El movimiento se activa por defecto, sin consultar ni escribir `localStorage`; una preferencia antigua de los controles retirados no lo desactiva. Se conserva `prefers-reduced-motion` del sistema y la cancelación de la onda si cambia. El inicio del movimiento se carga desde `LandingLayout.astro`, independiente de los botones retirados. También se retiraron el botón «Animar el título» y su explicación. La onda del título sigue funcionando al pasar el cursor, sin depender de controles visibles; el movimiento con el scroll permanece activo.
 
 El guion `scripts/verify-motion.py` se adaptó a este comportamiento y a la sección Autora habilitada. El registro de verificación histórico que sigue corresponde a la fase 5 anterior; las comprobaciones de esta actualización se realizan con revisión de tipos, compilación y navegador.
 

@@ -119,11 +119,6 @@ export interface LandingContent {
     rightsNotice?: string;
     links: ExternalLink[];
   };
-  controls: {
-    tryLetters: string;
-    letterPlayExplanation: string;
-    letterPlayContext: string;
-  };
   seo: {
     title: string;
     description: string;

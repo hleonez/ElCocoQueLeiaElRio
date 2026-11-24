@@ -35,7 +35,7 @@ const editions = book.editions?.filter((edition) =>
     <div class="section-copy">
       {section.id === 'autora' && author.role && <p class="author-role">{author.role}</p>}
       {section.id === 'inicio'
-        ? <AnimatedTitle id={`${section.id}-titulo`} title={section.heading} controls={content.controls} />
+        ? <AnimatedTitle id={`${section.id}-titulo`} title={section.heading} />
         : <h2 id={`${section.id}-titulo`}>{section.heading}</h2>}
       {section.id === 'inicio' && <p class="byline">Un cuento de {book.author}</p>}
       {!showMoments && section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
