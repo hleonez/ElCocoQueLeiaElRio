@@ -14,8 +14,8 @@ const { footer, controls } = Astro.props;
   <footer id={footer.id} class="site-footer">
     <div class="container">
       <p class="farewell">{footer.farewell}</p>
-      <p>{footer.credits}</p>
-      {footer.rightsNotice && <p>{footer.rightsNotice}</p>}
+      <p class="legal-copy">{footer.credits}</p>
+      {footer.rightsNotice && <p class="legal-copy legal-copy--italic">{footer.rightsNotice}</p>}
       {footer.links.length > 0 && (
         <ul class="external-links">
           {footer.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}

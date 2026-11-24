@@ -53,6 +53,10 @@ El título está confirmado en el original compartido en Drive. La biografía y 
 
 No se incluyen datos de ejemplo ni testimonios ficticios. No hace falta CMS ni base de datos para mantener estos archivos. Los tipos comprueban la estructura durante el desarrollo; no validan la existencia de enlaces ni datos externos.
 
+## Fuentes y paleta
+
+OpenDyslexic Regular y Bold es la fuente principal de toda la landing. Poppins Light e Italic se reservan a créditos y avisos legales. Las fuentes y sus licencias están en `public/fonts/`, servidas desde el propio sitio. Colores: crema `#faf3dc`, verde de guardas `#bcceb9` y café `#381c13` (aproximación del CMYK facilitado). La procedencia, distribución y verificación se documentan en [DISENO-VISUAL.md](DISENO-VISUAL.md).
+
 ## Entrega de la diseñadora
 
 Antes de desarrollar las secciones, reunir:
