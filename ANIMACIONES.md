@@ -1,5 +1,13 @@
 # Animaciones de la landing de Drilo
 
+## Actualización · 24 de noviembre de 2026
+
+Por solicitud del usuario se retiraron los botones globales de cabecera y pie. El movimiento se activa por defecto, sin consultar ni escribir `localStorage`; una preferencia antigua de los controles retirados no lo desactiva. Se conserva `prefers-reduced-motion` del sistema y la cancelación de la onda si cambia. El inicio del movimiento se carga desde `LandingLayout.astro`, independiente de los botones retirados. También se retiraron el botón «Animar el título» y su explicación. La onda del título sigue funcionando al pasar el cursor, sin depender de controles visibles; el movimiento con el scroll permanece activo.
+
+El guion `scripts/verify-motion.py` se adaptó a este comportamiento y a la sección Autora habilitada. El registro de verificación histórico que sigue corresponde a la fase 5 anterior; las comprobaciones de esta actualización se realizan con revisión de tipos, compilación y navegador.
+
+## Registro histórico de fase 5
+
 Fase 5 de [PLAN-LANDING.md](PLAN-LANDING.md), implementada el **22 de noviembre de 2026** sobre la fase 4. El recorrido conserva el lenguaje visual, la lectura completa y los pendientes editoriales. Por petición del usuario, **solo el título principal recibe animaciones de texto**.
 
 ## Dirección y experiencia
