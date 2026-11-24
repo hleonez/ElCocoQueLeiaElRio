@@ -79,13 +79,8 @@ li, p, dd, a, .image-placeholder { overflow-wrap: anywhere; }
 .container { width: min(100% - var(--page-gutter) * 2, var(--content-width)); margin-inline: auto; }
 .skip-link { position: absolute; top: 0.5rem; left: 1rem; z-index: 10; padding: 0.75rem 1rem; background: var(--paper); color: var(--ink); transform: translateY(-200%); }
 .skip-link:focus { transform: none; }
-.draft-note { padding: 0.5rem var(--page-gutter); background: var(--guard); color: var(--ink); text-align: center; font-size: 0.875rem; line-height: 1.5; }
-.header-surface { background: var(--paper); }
+.header-surface { background: var(--guard); }
 .site-header { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; padding-block: 1.5rem; }
-.motion-control { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 2.75rem; padding: 0.55rem 0; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-size: 0.875rem; line-height: 1.4; cursor: pointer; }
-.motion-control svg { flex: 0 0 auto; }
-.motion-control[hidden] { display: none; }
-.motion-control:disabled { cursor: default; border-bottom-style: dotted; }
 .site-title { max-width: 23ch; font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.6; text-decoration: none; }
 .navigation-list, .purchase-links, .external-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.75rem; list-style: none; margin: 0; padding: 0; }
 .navigation-list a { display: inline-flex; min-height: 2.75rem; align-items: center; font-weight: 700; }
@@ -162,20 +157,26 @@ li, p, dd, a, .image-placeholder { overflow-wrap: anywhere; }
 .gallery-grid img { width: 100%; }
 figcaption { margin-top: 0.75rem; }
 figcaption span { display: block; font-size: 0.875rem; }
-.author-name { font-weight: 700; }
 .author-role { color: var(--scarf); font-weight: 700; margin-bottom: 0.75rem; }
-.author-note { border-left: 2px solid var(--reed); padding-left: clamp(1.25rem, 3vw, 2rem); }
-.author-note h3 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.625rem); line-height: 1.6; }
-.author-note p { margin-top: 1rem; }
 .book-quote { margin-top: 2rem; border-left: 2px solid var(--reed); padding-left: 1.25rem; }
 .book-quote blockquote { margin: 0; font-family: var(--font-display); font-size: 1.125rem; line-height: 1.8; }
 .book-quote figcaption { font-size: 0.875rem; }
-.author-photo { width: 100%; max-width: 20rem; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 1.5rem; }
-.author-details .external-links { margin-top: 1rem; }
+.author-portrait { width: min(100%, 22rem); margin-inline: auto; }
+.author-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.author-portrait .image-placeholder { background: var(--paper); border-radius: 2rem 2rem 0.5rem 2rem; }
+.author-links { margin-top: 1.5rem; }
+.author-links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .section--autora { background: var(--surface); }
-.section--libro { position: relative; isolation: isolate; background: var(--paper); }
-.section--libro::before { content: ''; position: absolute; inset: 0 0 auto; height: clamp(14rem, 35vw, 25rem); z-index: -1; background: var(--surface); border-radius: 0 0 50% 8%; }
-.section--libro .section-copy { max-width: 46rem; }
+/* El fondo crece con el texto; la curva queda debajo incluso al ampliar la fuente. */
+.section--libro { padding-top: 0; background: var(--paper); }
+.section--libro .section-layout { width: 100%; }
+.section--libro .section-copy {
+  max-width: none;
+  padding: clamp(1rem, 3vw, 2rem) max(var(--page-gutter), calc((100% - var(--content-width)) / 2)) 4rem;
+  background: var(--guard);
+  border-radius: 0 0 50% 8% / 0 0 3rem 1rem;
+}
+.section--libro .book-details { width: min(100% - var(--page-gutter) * 2, var(--content-width)); margin-inline: auto; }
 .book-details { display: grid; gap: 2rem; align-items: start; }
 .purchase-cover { position: relative; width: min(100%, 20rem); padding: 1.5rem; background: var(--paper); border-radius: 48% 46% 20% 30%; }
 .purchase-cover .image-placeholder { border-style: solid; background: var(--paper); box-shadow: -0.4rem 0.4rem 0 var(--guard); }
@@ -189,7 +190,6 @@ figcaption span { display: block; font-size: 0.875rem; }
 .site-footer { position: relative; padding-block: 3rem; background: var(--guard); color: var(--ink); }
 .site-footer::before { content: ''; position: absolute; inset: -1.5rem 0 auto; height: 1.5rem; background: var(--guard); clip-path: ellipse(70% 100% at 35% 100%); }
 .site-footer :focus-visible { outline-color: var(--ink); }
-.site-footer .motion-control { margin-top: 1.5rem; }
 .farewell { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 700; line-height: 1.6; margin-bottom: 1rem; }
 .site-footer .external-links { margin-top: 1.5rem; }
 .fallback-title { padding-block: 2rem; }

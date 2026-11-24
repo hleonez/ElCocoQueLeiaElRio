@@ -15,6 +15,13 @@ OpenDyslexic procede del ZIP `opendyslexic-0.92.zip` proporcionado por el usuari
 
 Validación: `npm run check` y `npm run build` correctos (sin errores ni advertencias, con las ocho sugerencias previas del submódulo). Se comprobó la presencia de tildes, ñ, signos de apertura y elipsis en las cuatro fuentes. Contraste de café sobre crema: 14.08:1; sobre verde: 9.43:1. Navegador revisado a 320, 390, 827 y 1440 px sin desbordamiento horizontal; estilos computados confirman OpenDyslexic en cuerpo y título, Poppins en créditos, y los nuevos colores. Inspección visual de primera pantalla y sección Autora. Las capturas históricas de fases anteriores no reflejan esta paleta.
 
+## Ajustes de revisión · 24 de noviembre de 2026
+
+- Se retira la barra de revisión. La cabecera usa el verde del libro con texto café (contraste 9.43:1); el botón café mantiene texto crema (14.08:1).
+- La sección Autora reserva un retrato a la izquierda y conserva nombre, rol, biografía e Instagram `https://www.instagram.com/millunaress__/` a la derecha. En móvil se apilan. Se retira la nota «Un sueño que tomó forma de cuento».
+- La introducción de compra sube y su fondo crece con el contenido. La curva utiliza un radio vertical de 3rem y un espacio inferior de 4rem para dejar el texto sobre verde con independencia del ancho y del número de líneas.
+- Se retiran los controles globales de movimiento; ver ANIMACIONES.md.
+
 ## Registro de la propuesta inicial de fase 3
 
 Fase 3 de [PLAN-LANDING.md](PLAN-LANDING.md), preparada el **22 de noviembre de 2026**. La propuesta se puede recorrer en `/` con `npm run dev`. Fija el lenguaje de la primera pantalla y de **Conoce a Drilo**; las demás secciones conservan la composición del wireframe con los estilos comunes de lectura. La versión estática completa y las animaciones siguen siendo fases posteriores.

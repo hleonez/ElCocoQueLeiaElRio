@@ -28,7 +28,6 @@ export interface Author {
   name: string;
   role?: string;
   biography: string;
-  creativeNote?: { heading: string; text: string };
   photo?: string;
   links: ExternalLink[];
 }
@@ -121,9 +120,6 @@ export interface LandingContent {
     links: ExternalLink[];
   };
   controls: {
-    enableMotion: string;
-    disableMotion: string;
-    reducedMotion: string;
     tryLetters: string;
     letterPlayExplanation: string;
     letterPlayContext: string;

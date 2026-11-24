@@ -12,7 +12,7 @@ Fuentes primarias consultadas:
 - [Portada, lomo y contraportada](https://drive.google.com/file/d/1XE902j-T_JPNMioaI0ixC5etuqiOhsX4/view): lectura desde los 5 años y temas de empatía, diversidad y confianza en uno mismo.
 - [Biografia.docx](https://docs.google.com/document/d/1g4c0_86fDBOTKODJLEY2OAFPG_OfGPPa/edit): Barranquilla, pasión por el dibujo, estudios de Diseño Gráfico, La Tiendita del Stickers, ferias y sueño de ilustrar para niños. No se afirma una graduación ni se actualiza su situación académica a partir de un texto de 2025.
 
-La autora está habilitada, con enlace en navegación, biografía y una nota sobre el origen creativo del cuento. Se conserva la sección sin retrato porque la carpeta Autora solo contiene la biografía. El título queda confirmado con el original; la variante de la URL de ITA se conserva en el enlace de compra.
+La autora está habilitada, con enlace en navegación, biografía y el Instagram indicado por el usuario: https://www.instagram.com/millunaress__/. La sección reserva un espacio para el retrato a la izquierda y el texto a la derecha (apilados en móvil). Se retiró la nota sobre el origen creativo del cuento por petición del usuario. El retrato final se integra mediante `author.photo`. El título queda confirmado con el original; la variante de la URL de ITA se conserva en el enlace de compra.
 
 Límite editorial: presentar a Drilo, sus dificultades en la escuela, el sentimiento de incomprensión y el acompañamiento de su abuela. Reservar para el libro el método que explora Drilo, el incidente central, su intervención y los cambios finales en su entorno. El texto promocional usa preguntas abiertas y no cuenta el desenlace. La cita de la abuela se distingue de las adaptaciones y no se enlaza al PDF completo desde la página pública.
 
@@ -71,7 +71,7 @@ La fuente editable de los textos es [src/content/landing.ts](src/content/landing
 | Historia / `historia` | Sinopsis y tres momentos: dificultad, acompañamiento y pregunta abierta | Habilitado. La composición decidirá entre sinopsis o momentos para evitar repetir la misma información |
 | Interior / `interior` | Encabezado e introducción de la galería | Desactivado hasta disponer de interiores autorizados |
 | Propósito / `proposito` | Mensaje sobre empatía y tres preguntas para conversar | Habilitado |
-| Autora / `autora` | Nombre completo, rol, biografía y origen creativo del cuento | Habilitado sin retrato; enlace en el menú |
+| Autora / `autora` | Espacio para retrato, nombre completo, rol, biografía e Instagram | Habilitado; enlace en el menú |
 | Compra / `libro` | Cierre, aviso para consultar condiciones en tienda y enlace ITA | Habilitado, sin prometer stock ni entregas |
 | Pie / `pie` | Despedida, crédito textual de autoría y edición | Habilitado; derechos y redes se incorporarán cuando se confirmen |
 

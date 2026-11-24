@@ -25,6 +25,13 @@ const editions = book.editions?.filter((edition) =>
 
 <section id={section.id} class:list={['landing-section', `section--${section.id}`]} aria-labelledby={`${section.id}-titulo`}>
   <div class="container section-layout">
+    {section.id === 'autora' && (
+      <div class="author-portrait">
+        {author.photo
+          ? <img class="author-photo" src={author.photo} alt={author.name} loading="lazy" />
+          : <ImagePlaceholder label="Foto de Laura Londoño" format="portrait" />}
+      </div>
+    )}
     <div class="section-copy">
       {section.id === 'autora' && author.role && <p class="author-role">{author.role}</p>}
       {section.id === 'inicio'
@@ -32,6 +39,11 @@ const editions = book.editions?.filter((edition) =>
         : <h2 id={`${section.id}-titulo`}>{section.heading}</h2>}
       {section.id === 'inicio' && <p class="byline">Un cuento de {book.author}</p>}
       {!showMoments && section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {section.id === 'autora' && author.links.length > 0 && (
+        <ul class="external-links author-links">
+          {author.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
+        </ul>
+      )}
       {section.quote && (
         <figure class="book-quote">
           <blockquote><p>«{section.quote.text}»</p></blockquote>
@@ -93,23 +105,6 @@ const editions = book.editions?.filter((edition) =>
       <div class="conversation">
         <h3>Para conversar en compañía</h3>
         <ul>{section.questions.map((question) => <li>{question}</li>)}</ul>
-      </div>
-    )}
-
-    {section.id === 'autora' && (
-      <div class="author-details">
-        {author.photo && <img class="author-photo" src={author.photo} alt={author.name} loading="lazy" />}
-        {author.creativeNote && (
-          <div class="author-note">
-            <h3>{author.creativeNote.heading}</h3>
-            <p>{author.creativeNote.text}</p>
-          </div>
-        )}
-        {author.links.length > 0 && (
-          <ul class="external-links">
-            {author.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
-          </ul>
-        )}
       </div>
     )}
 

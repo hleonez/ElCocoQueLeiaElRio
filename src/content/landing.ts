@@ -37,11 +37,7 @@ export const author: Author = {
   // Adaptación de Biografia.docx; sin convertir su situación académica de 2025 en un dato actual.
   biography:
     'Laura nació en Barranquilla, Colombia. Desde pequeña le ha gustado dibujar y crear; ese amor por el arte la llevó a estudiar Diseño Gráfico. Ha trabajado en proyectos como La Tiendita del Stickers y ha compartido su arte en distintas ferias.',
-  creativeNote: {
-    heading: 'Un sueño que tomó forma de cuento',
-    text: 'Ilustrar para niños era uno de sus grandes sueños. En El coco que leía el río, Laura reúne sus palabras y sus dibujos para darle vida a Drilo y al mundo que lo rodea.',
-  },
-  links: [],
+  links: [{ label: 'Instagram de Laura · @millunaress__', url: 'https://www.instagram.com/millunaress__/' }],
 };
 
 export const landingContent: LandingContent = {
@@ -153,11 +149,8 @@ export const landingContent: LandingContent = {
     // Añadir derechos y perfiles solo cuando estén confirmados.
     links: [],
   },
-  // Preferencias globales y juego del título, sin alterar el texto editorial.
+  // Juego del título; el movimiento general sigue la preferencia del sistema.
   controls: {
-    enableMotion: 'Activar animaciones',
-    disableMotion: 'Desactivar animaciones',
-    reducedMotion: 'Movimiento reducido del sistema',
     tryLetters: 'Animar el título',
     letterPlayExplanation: 'Una onda en las letras, como el agua del río.',
     letterPlayContext:

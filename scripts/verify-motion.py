@@ -54,12 +54,13 @@ with sync_playwright() as playwright:
     assert title.count() == 1
     assert title.text_content() == TITLE  # Selection/copy includes correct spaces and accents.
     assert page.locator('meta[name="robots"]').get_attribute('content') == 'noindex'
-    assert page.locator('main > section').evaluate_all('(els) => els.map(el => el.id)') == ['inicio', 'drilo', 'historia', 'proposito', 'libro']
+    assert page.locator('main > section').evaluate_all('(els) => els.map(el => el.id)') == ['inicio', 'drilo', 'historia', 'proposito', 'autora', 'libro']
     assert page.locator('a[href^="#"]').evaluate_all('(els) => els.every(el => document.getElementById(el.hash.slice(1)))')
 
     # A wave starts on keyboard activation, restores itself, and causes no reflow.
     trigger = page.get_by_role('button', name='Animar el título', exact=True)
-    buttons = page.locator('[data-motion-control]')
+    assert page.locator('[data-motion-control], .draft-note').count() == 0
+    assert page.locator('html').get_attribute('data-motion') == 'on'
     expect(trigger).to_be_enabled()
     layout = page.locator('.byline').bounding_box()
     trigger.focus()
@@ -115,27 +116,12 @@ with sync_playwright() as playwright:
     assert page.locator('h2, h3, .section-copy > p, .story-moment > p, .conversation li, .edition-facts').evaluate_all('(els) => els.every(el => el.getAnimations().length === 0)')
     assert page.evaluate('window.motionInputListeners') == []
 
-    # Both pause and a live system preference cancel even a running manual wave.
+    # System preference changes cancel a running wave without manual controls.
     scroll(page, 0)
-    trigger.focus()
-    page.keyboard.press('Space')
-    page.wait_for_function(f'({ACTIVE_LETTERS})() > 0')
-    buttons.first.click()
-    assert page.evaluate(ACTIVE_LETTERS) == 0
-    expect(trigger).to_be_disabled()
-    assert buttons.evaluate_all('(els) => els.every(el => el.getAttribute("aria-pressed") === "false")')
-    assert style(page, '.journey-progress', 'display') == 'none'
-    assert style(page, '.river-journey', 'position') == 'relative'
-    assert page.evaluate('document.getAnimations().length') == 0
-    page.reload(wait_until='networkidle')
-    expect(trigger).to_be_disabled()
-    buttons.first.click()
-    expect(trigger).to_be_enabled()
     trigger.focus()
     page.keyboard.press('Enter')
     page.wait_for_function(f'({ACTIVE_LETTERS})() > 0')
     page.emulate_media(reduced_motion='reduce')
-    expect(buttons.first).to_be_disabled()
     expect(trigger).to_be_disabled()
     assert page.evaluate(ACTIVE_LETTERS) == 0
     assert page.evaluate('document.getAnimations().length') == 0
@@ -143,6 +129,13 @@ with sync_playwright() as playwright:
     assert style(page, 'html', 'scroll-behavior') == 'auto'
     page.emulate_media(reduced_motion='no-preference')
     expect(trigger).to_be_enabled()
+
+    # A stored choice from the retired controls must not disable default motion.
+    page.evaluate("localStorage.setItem('drilo-motion', 'off')")
+    page.reload(wait_until='networkidle')
+    expect(trigger).to_be_enabled()
+    assert page.locator('html').get_attribute('data-motion') == 'on'
+    page.evaluate("localStorage.removeItem('drilo-motion')")
 
     page.goto(args.url, wait_until='networkidle')
     page.keyboard.press('Tab')
@@ -172,7 +165,7 @@ with sync_playwright() as playwright:
             name = 'movil' if width == 390 else 'escritorio'
             page.screenshot(path=str(args.screenshots / f'fase5-{name}.jpg'), type='jpeg', quality=85)
 
-    # Touch uses the same native button; denied storage stays usable in-session.
+    # Touch uses the same native title button; storage is not required.
     touch_context = browser.new_context(has_touch=True, is_mobile=True, viewport={'width': 390, 'height': 844})
     touch_context.add_init_script('''
       Storage.prototype.getItem = Storage.prototype.setItem = () => { throw new DOMException('Blocked', 'SecurityError'); };
@@ -182,9 +175,8 @@ with sync_playwright() as playwright:
     touch.goto(args.url, wait_until='networkidle')
     touch.get_by_role('button', name='Animar el título', exact=True).tap()
     touch.wait_for_function(f'({ACTIVE_LETTERS})() > 0')
-    touch.locator('[data-motion-control]').first.tap()
-    assert touch.evaluate(ACTIVE_LETTERS) == 0
-    expect(touch.get_by_role('button', name='Animar el título', exact=True)).to_be_disabled()
+    touch.wait_for_function(f'({ACTIVE_LETTERS})() === 0')
+    expect(touch.get_by_role('button', name='Animar el título', exact=True)).to_be_enabled()
 
     static = browser.new_context(java_script_enabled=False, reduced_motion='reduce').new_page()
     static.goto(args.url, wait_until='networkidle')
@@ -194,5 +186,5 @@ with sync_playwright() as playwright:
     static.get_by_role('link', name='Encuentra el libro', exact=True).click()
     expect(static).to_have_url(args.url.rstrip('/') + '/#libro')
     assert not errors, errors
-    print(json.dumps({'ok': True, 'widths': [320, 390, 768, 1024, 1440], 'story_leaf': [leaf_start, leaf_end], 'checks': ['title: keyboard, pointer, touch, no reflow, cleanup', 'native scroll: advance and reverse', 'no scroll input listeners', 'only main title animates text', 'pause, persistence, live reduced motion', 'blocked storage', 'no JavaScript', 'navigation', 'no overflow or page errors']}, ensure_ascii=False))
+    print(json.dumps({'ok': True, 'widths': [320, 390, 768, 1024, 1440], 'story_leaf': [leaf_start, leaf_end], 'checks': ['title: keyboard, pointer, touch, no reflow, cleanup', 'native scroll: advance and reverse', 'no scroll input listeners', 'only main title animates text', 'default motion, legacy storage ignored, live reduced motion', 'blocked storage', 'no JavaScript', 'navigation', 'no overflow or page errors']}, ensure_ascii=False))
     browser.close()

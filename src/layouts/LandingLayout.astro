@@ -20,16 +20,14 @@ const { seo } = Astro.props;
     {seo.noindex && <meta name="robots" content="noindex" />}
     <meta name="description" content={seo.description} />
     <title>{seo.title}</title>
-    <script is:inline>
-      try {
-        if (localStorage.getItem('drilo-motion') === 'off') document.documentElement.dataset.motion = 'off';
-      } catch { /* La lectura no depende del almacenamiento. */ }
-    </script>
   </head>
   <body>
     <div class="journey-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <div class="draft-note">Versión en revisión · Ilustraciones originales pendientes</div>
     <slot />
+    <script>
+      import { initMotion } from '../scripts/motion';
+      initMotion();
+    </script>
   </body>
 </html>
