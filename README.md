@@ -99,3 +99,13 @@ python scripts/verify-motion.py --url http://localhost:4324
 El servidor de prueba puede iniciarse, después de `npm run build`, con `python -m http.server 4324 --bind 127.0.0.1 --directory dist`. Las capturas se guardan en `.qa/fase5/`; `--screenshots` permite elegir otro destino. Las pruebas comprueban interacciones, reversibilidad del scroll, preferencias, lectura sin JavaScript y distribución responsive.
 
 No hay hosting, integraciones, analítica, backend ni configuración de despliegue en esta base.
+
+## Rendimiento del recorrido
+
+La landing utiliza imágenes WebP con variantes de 640/1280 px para la autora y 480/960 px para la portada, `srcset`, dimensiones explícitas y decodificación asíncrona. Las variantes mayores suman 686 KB frente a los 10,1 MB originales. Los originales se conservan en `public/images/`, pero la página carga los derivados de `public/images/optimized/`. Regenerarlos con `node scripts/optimize-images.mjs` después de instalar las dependencias del proyecto. La foto se orienta según sus metadatos antes de redimensionar; conservar su encuadre visual y el escalado existente al sustituirla.
+
+Las cuatro fuentes se sirven en WOFF2 y conservan todos sus caracteres y licencias. Los OTF/TTF originales permanecen junto a las licencias. Para regenerar los derivados, instalar `fonttools` y `brotli` en el entorno de herramientas y ejecutar `python scripts/optimize-fonts.py`.
+
+Un observador activa las animaciones de paisaje únicamente cerca de la ventana. En móvil permanecen estáticos los paisajes grandes; continúan los gestos pequeños y las interacciones. El trazo del río ya no se redibuja durante el scroll y el color de la orilla cambia sin una interpolación continua. Los cambios de escena se resuelven una vez por entrega del observador y evitan escrituras de estado repetidas. No se intercepta el scroll ni se fuerzan capas con `will-change`.
+
+Comparación orientativa en el navegador integrado, con copias compiladas e idéntico medidor temporal: recorrido rápido mediante Page Down, Home, desplazamientos largos y End. En las primeras 62 muestras, antes: p95 de 33 ms, máximo de 67 ms y un intervalo superior a 50 ms; después: p95 de 17 ms, máximo de 22 ms y ninguno superior a 50 ms. Son intervalos entre `requestAnimationFrame` durante el scroll, no una traza del renderizador ni una garantía para otros equipos. El medidor y las copias están en `.qa/`, fuera de la entrega. Validar también con un teléfono físico y caché vacía antes del lanzamiento.
