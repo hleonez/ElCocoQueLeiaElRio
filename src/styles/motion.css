@@ -4,7 +4,6 @@
 @keyframes far-depth { from { transform: translateY(0); } to { transform: translateY(1.5rem); } }
 @keyframes water-current { from { transform: translateX(-.5rem); } to { transform: translateX(.75rem); } }
 @keyframes butterfly-journey { from { transform: translate(0, 0) rotate(18deg); } to { transform: translate(4rem, 12rem) rotate(-22deg); } }
-@keyframes river-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes leaf-journey { from { transform: translate(0, -3rem) rotate(25deg); } to { transform: translate(2rem, 12rem) rotate(95deg); } }
 @keyframes mangrove-depth { from { transform: translateY(-1.5rem); } to { transform: translateY(1rem); } }
 @keyframes water-breathe { from { transform: scale(.85); } to { transform: scale(1.15); } }
@@ -12,7 +11,8 @@
 
 @media (prefers-reduced-motion: no-preference) {
   :root { scroll-behavior: smooth; }
-  .signal-river .sign, .passage-reeds, .scene-vignette, .signal-shore { transition: transform 850ms cubic-bezier(.22,.61,.36,1), opacity 850ms, stroke 850ms; }
+  .signal-river .sign, .passage-reeds { transition: transform 550ms cubic-bezier(.22,.61,.36,1); }
+  .scene-vignette { transition: opacity 350ms; }
   .river-wayfinder { transition: color 400ms; }
   .button, .quiet-button { transition: background-color 180ms, border-color 180ms; }
 }
@@ -25,20 +25,28 @@
     }
     body[data-river-theme='dark'] .journey-progress { background: var(--guard); }
     .river-hero { view-timeline: --arrival block; }
-    .river-hero .landscape-foreground { animation: bank-depth 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
-    .river-hero .landscape-distant { animation: far-depth 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
-    .river-hero .landscape-current { animation: water-current 1s linear both; animation-timeline: --arrival !important; animation-range: entry 0% exit 100%; }
-    .hero-butterfly { animation: butterfly-journey 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
-    .animated-title__word { animation: title-drift 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
+    .river-hero[data-scene-visible='true'] .landscape-foreground { animation: bank-depth 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
+    .river-hero[data-scene-visible='true'] .landscape-distant { animation: far-depth 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
+    .river-hero[data-scene-visible='true'] .landscape-current { animation: water-current 1s linear both; animation-timeline: --arrival !important; animation-range: entry 0% exit 100%; }
+    [data-scene-visible='true'] .hero-butterfly { animation: butterfly-journey 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
+    [data-scene-visible='true'] .animated-title__word { animation: title-drift 1s linear both; animation-timeline: --arrival !important; animation-range: exit 0% exit 100%; }
     .river-encounter { view-timeline: --encounter block; }
-    .encounter-trail { animation: river-trace 1s linear both; animation-timeline: --encounter !important; animation-range: entry 10% exit 80%; }
-    .encounter-leaf { animation: leaf-journey 1s linear both; animation-timeline: --encounter !important; animation-range: entry 0% exit 100%; }
+    [data-scene-visible='true'] .encounter-leaf { animation: leaf-journey 1s linear both; animation-timeline: --encounter !important; animation-range: entry 0% exit 100%; }
     .mangrove-rest { view-timeline: --rest block; }
-    .mangrove-canopy { animation: mangrove-depth 1s linear both; animation-timeline: --rest !important; animation-range: entry 0% exit 100%; }
-    .quiet-water { animation: water-breathe 1s linear both; animation-timeline: --rest !important; animation-range: entry 0% exit 100%; }
+    [data-scene-visible='true'] .mangrove-canopy { animation: mangrove-depth 1s linear both; animation-timeline: --rest !important; animation-range: entry 0% exit 100%; }
+    [data-scene-visible='true'] .quiet-water { animation: water-breathe 1s linear both; animation-timeline: --rest !important; animation-range: entry 0% exit 100%; }
     .book-estuary { view-timeline: --estuary block; }
-    .book-estuary .landscape-foreground { animation: bank-depth 1s linear both; animation-timeline: --estuary !important; animation-range: entry 0% exit 100%; }
+    .book-estuary[data-scene-visible='true'] .landscape-foreground { animation: bank-depth 1s linear both; animation-timeline: --estuary !important; animation-range: entry 0% exit 100%; }
   }
+}
+/* En móvil, conservar los gestos pequeños y dejar estáticos los paisajes grandes. */
+@media (max-width: 47.999rem) {
+  .river-hero[data-scene-visible='true'] .landscape-foreground,
+  .river-hero[data-scene-visible='true'] .landscape-distant,
+  .river-hero[data-scene-visible='true'] .landscape-current,
+  .book-estuary[data-scene-visible='true'] .landscape-foreground,
+  [data-scene-visible='true'] .mangrove-canopy,
+  [data-scene-visible='true'] .animated-title__word { animation: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }

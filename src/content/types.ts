@@ -5,6 +5,9 @@ export interface Book {
   synopsis: string;
   /** Omitir hasta disponer de un archivo autorizado; no usar rutas ficticias. */
   cover?: string;
+  coverSrcSet?: string;
+  coverWidth?: number;
+  coverHeight?: number;
   seoDescription: string;
   isbn?: string;
   publisher?: string;
@@ -29,6 +32,9 @@ export interface Author {
   role?: string;
   biography: string;
   photo?: string;
+  photoSrcSet?: string;
+  photoWidth?: number;
+  photoHeight?: number;
   links: ExternalLink[];
 }
 

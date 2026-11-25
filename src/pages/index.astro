@@ -90,7 +90,7 @@ const waypoints = [
       <section id="autora" class="author-bank" data-river-section aria-labelledby="autora-titulo">
         <div class="container author-layout">
           <div class="author-portrait">
-            {author.photo ? <img src={author.photo} alt={author.name} loading="lazy" /> : <div class="author-paper"><span class="portrait-leaf" aria-hidden="true"></span><p>{journey.author.portraitLabel}</p><span class="author-signature">Laura<br />Londoño</span><small>{journey.author.portraitCaption}</small></div>}
+            {author.photo ? <img src={author.photo} srcset={author.photoSrcSet} sizes="(max-width: 767px) min(152vw, 622px), (max-width: 992px) 70vw, 740px" width={author.photoWidth} height={author.photoHeight} alt={author.name} loading="lazy" decoding="async" /> : <div class="author-paper"><span class="portrait-leaf" aria-hidden="true"></span><p>{journey.author.portraitLabel}</p><span class="author-signature">Laura<br />Londoño</span><small>{journey.author.portraitCaption}</small></div>}
           </div>
           <div class="author-copy"><p class="eyebrow">{journey.author.label}</p><h2 id="autora-titulo">{author.name}</h2><p class="author-role">{author.role}</p><p>{author.biography}</p><ul class="author-links">{author.links.map((link) => <li><a class="text-link" href={link.url}>{link.label}</a></li>)}</ul></div>
         </div>
@@ -109,7 +109,7 @@ const waypoints = [
             <p class="book-flip-hint eyebrow" aria-live="polite">Haz clic sobre la portada para conocer el libro</p>
             <div class="book-flip-stage">
             <div class="book-flip-pages">
-            <div class="book-flip-cover"><img src="/images/portada-drilo.png" alt={`Portada de ${book.title}, de ${book.author}`} loading="lazy" /></div>
+            <div class="book-flip-cover"><img src={book.cover} srcset={book.coverSrcSet} sizes="(max-width: 992px) min(100vw - 48px, 480px), (max-width: 1264px) 34vw, 416px" width={book.coverWidth} height={book.coverHeight} alt={`Portada de ${book.title}, de ${book.author}`} loading="lazy" decoding="async" /></div>
           <div class="edition-panel book-flip-back" aria-hidden="true">
             <p class="eyebrow">Para compartir desde los 5 años</p>
             <h3>{book.title}</h3><p>Texto e ilustraciones de {book.author}</p>
