@@ -13,6 +13,10 @@ export const book: Book = {
   // Título confirmado en el PDF de la autora; ITA usa otra variante en su URL.
   title: 'El coco que leía el río',
   author: 'Laura Londoño',
+  cover: '/images/optimized/portada-drilo-480.webp',
+  coverSrcSet: '/images/optimized/portada-drilo-480.webp 480w, /images/optimized/portada-drilo-960.webp 960w',
+  coverWidth: 960,
+  coverHeight: 960,
   synopsis:
     'Drilo vive con su familia en un gran río. Leer sus señales le cuesta, y las burlas de su hermano lo hacen sentirse pequeño. Pero su abuela lo escucha y le recuerda que hay muchas formas de aprender…',
   seoDescription:
@@ -33,7 +37,10 @@ export const book: Book = {
 
 export const author: Author = {
   name: 'Laura Londoño Ospina',
-  photo: '/images/laura-londono.jpeg',
+  photo: '/images/optimized/laura-londono-640.webp',
+  photoSrcSet: '/images/optimized/laura-londono-640.webp 640w, /images/optimized/laura-londono-1280.webp 1280w',
+  photoWidth: 1280,
+  photoHeight: 1707,
   role: 'Autora e ilustradora',
   // Adaptación de Biografia.docx; sin convertir su situación académica de 2025 en un dato actual.
   biography:
