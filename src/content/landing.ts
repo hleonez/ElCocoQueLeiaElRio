@@ -33,6 +33,7 @@ export const book: Book = {
 
 export const author: Author = {
   name: 'Laura Londoño Ospina',
+  photo: '/images/laura-londono.jpeg',
   role: 'Autora e ilustradora',
   // Adaptación de Biografia.docx; sin convertir su situación académica de 2025 en un dato actual.
   biography:
