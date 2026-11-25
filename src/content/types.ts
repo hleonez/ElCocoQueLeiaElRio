@@ -26,6 +26,7 @@ export interface BookEdition {
 
 export interface Author {
   name: string;
+  role?: string;
   biography: string;
   photo?: string;
   links: ExternalLink[];
@@ -83,6 +84,7 @@ export interface LandingSection {
   enabled: boolean;
   heading: string;
   paragraphs: string[];
+  quote?: { text: string; attribution: string };
   navigationLabel?: string;
   primaryAction?: SectionAction;
   secondaryAction?: SectionAction;
@@ -116,14 +118,6 @@ export interface LandingContent {
     credits: string;
     rightsNotice?: string;
     links: ExternalLink[];
-  };
-  controls: {
-    enableMotion: string;
-    disableMotion: string;
-    reducedMotion: string;
-    tryLetters: string;
-    letterPlayExplanation: string;
-    letterPlayContext: string;
   };
   seo: {
     title: string;

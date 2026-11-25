@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
+    "test": "node --test scripts/river-journey.test.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },

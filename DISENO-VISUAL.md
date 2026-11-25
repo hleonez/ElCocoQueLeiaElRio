@@ -1,5 +1,29 @@
 # Diseño visual de la landing de Drilo
 
+## Paleta y tipografías del libro · 24 de noviembre de 2026
+
+Esta actualización sustituye la paleta y las fuentes provisionales de la fase 3 descritas más abajo.
+
+- Fondo crema: `#faf3dc` (`--paper`).
+- Verde de guardas: `#bcceb9` (`--guard`), aplicado a Historia, Autora y el pie, además de elementos del río.
+- Café de texto: `#381c13` (`--ink`), aproximación sRGB de C27 M64 Y75 K70 mediante R=255(1-C)(1-K), y equivalentes para G y B. No se proporcionó un perfil ICC; no representa una conversión colorimétrica exacta del impreso. Los dos colores que tienen HEX usan ese valor como referencia de pantalla.
+- OpenDyslexic Regular y Bold para títulos, cuerpo, navegación, preguntas, citas y controles. Se quitaron el espaciado negativo y las alturas de línea estrechas de la tipografía anterior. Preload de ambas variantes y `font-display: swap`.
+- Poppins Light (300) para créditos y avisos legales. Poppins Italic (400) se configura para los avisos en cursiva. No hay un bloque de agradecimientos en la landing actual; no se inventa contenido para mostrar la fuente.
+- Fuentes alojadas localmente: `public/fonts/opendyslexic/` y `public/fonts/poppins/`. No hay solicitudes a Google Fonts en tiempo de lectura.
+
+OpenDyslexic procede del ZIP `opendyslexic-0.92.zip` proporcionado por el usuario. Se copiaron únicamente Regular y Bold, sin alterar sus archivos OTF; `OFL.txt` conserva la licencia embebida en la fuente. Poppins Light, Italic y su licencia proceden del [repositorio oficial de Google Fonts](https://github.com/google/fonts/tree/main/ofl/poppins); se conservan los TTF originales y `OFL.txt`.
+
+Validación: `npm run check` y `npm run build` correctos (sin errores ni advertencias, con las ocho sugerencias previas del submódulo). Se comprobó la presencia de tildes, ñ, signos de apertura y elipsis en las cuatro fuentes. Contraste de café sobre crema: 14.08:1; sobre verde: 9.43:1. Navegador revisado a 320, 390, 827 y 1440 px sin desbordamiento horizontal; estilos computados confirman OpenDyslexic en cuerpo y título, Poppins en créditos, y los nuevos colores. Inspección visual de primera pantalla y sección Autora. Las capturas históricas de fases anteriores no reflejan esta paleta.
+
+## Ajustes de revisión · 24 de noviembre de 2026
+
+- Se retira la barra de revisión. La cabecera usa el verde del libro con texto café (contraste 9.43:1); el botón café mantiene texto crema (14.08:1).
+- La sección Autora reserva un retrato a la izquierda y conserva nombre, rol, biografía e Instagram `https://www.instagram.com/millunaress__/` a la derecha. En móvil se apilan. Se retira la nota «Un sueño que tomó forma de cuento».
+- La introducción de compra sube y su fondo crece con el contenido. La curva utiliza un radio vertical de 3rem y un espacio inferior de 4rem para dejar el texto sobre verde con independencia del ancho y del número de líneas.
+- Se retiran los controles globales de movimiento; ver ANIMACIONES.md.
+
+## Registro de la propuesta inicial de fase 3
+
 Fase 3 de [PLAN-LANDING.md](PLAN-LANDING.md), preparada el **22 de noviembre de 2026**. La propuesta se puede recorrer en `/` con `npm run dev`. Fija el lenguaje de la primera pantalla y de **Conoce a Drilo**; las demás secciones conservan la composición del wireframe con los estilos comunes de lectura. La versión estática completa y las animaciones siguen siendo fases posteriores.
 
 ## Dirección y decisiones antes de implementar

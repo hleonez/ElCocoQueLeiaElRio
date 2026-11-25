@@ -1,5 +1,7 @@
 # Landing del libro
 
+La versión actual convierte la página en un recorrido por el río: entrada luminosa, paisaje por capas, señales entre juncos, pausa bajo el manglar y llegada al libro. Decisiones, archivos y validación en [RECORRIDO-RIO.md](RECORRIDO-RIO.md). Los textos de las escenas se editan en `src/content/journey.ts`; libro, autora y enlaces permanecen en `src/content/landing.ts`. `npm test` ejecuta las regresiones de la interacción y el seguimiento de escenas.
+
 Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe, Diseño visual, Versión estática y Animación con los recursos disponibles: recorrido responsive, título interactivo y escenas vinculadas al scroll. Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
@@ -49,9 +51,13 @@ El inventario, las fuentes, el estado de los datos y los materiales pendientes e
 
 `src/content/types.ts` define los contratos `Book`, `BookEdition`, `Author`, `ExternalLink`, `PurchaseLink`, `PhysicalStore`, `LandingSection`, `SectionIllustration`, `GalleryImage` y `LandingContent`. Los objetos están tipados para comprobar su estructura. Los componentes reciben estos datos mediante propiedades; evitar textos y URLs comerciales repartidos por los componentes.
 
-El título es provisional. Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. Interiores y autora están desactivados. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
+El título está confirmado en el original compartido en Drive. La biografía y los textos se adaptaron de los archivos de la autora (ver CONTENIDO.md). Los datos físicos están asociados únicamente a la edición de ITA. Portada, retrato, derechos, Amazon e imagen social siguen pendientes: se omiten los campos o se usan arreglos vacíos, sin rutas ni enlaces ficticios. La sección Autora está habilitada sin retrato; Interiores sigue desactivada. El menú excluye secciones con `enabled: false`; las acciones internas también omiten destinos desactivados.
 
 No se incluyen datos de ejemplo ni testimonios ficticios. No hace falta CMS ni base de datos para mantener estos archivos. Los tipos comprueban la estructura durante el desarrollo; no validan la existencia de enlaces ni datos externos.
+
+## Fuentes y paleta
+
+OpenDyslexic Regular y Bold es la fuente principal de toda la landing. Poppins Light e Italic se reservan a créditos y avisos legales. Las fuentes y sus licencias están en `public/fonts/`, servidas desde el propio sitio. Colores: crema `#faf3dc`, verde de guardas `#bcceb9` y café `#381c13` (aproximación del CMYK facilitado). La procedencia, distribución y verificación se documentan en [DISENO-VISUAL.md](DISENO-VISUAL.md).
 
 ## Entrega de la diseñadora
 
