@@ -1,19 +1,118 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
 import LandingHeader from '../components/LandingHeader.astro';
-import LandingSection from '../components/LandingSection.astro';
 import LandingFooter from '../components/LandingFooter.astro';
+import AnimatedTitle from '../components/AnimatedTitle.astro';
+import RiverLandscape from '../components/RiverLandscape.astro';
+import SignalPassage from '../components/SignalPassage.astro';
+import Mangrove from '../components/Mangrove.astro';
+import Butterfly from '../components/Butterfly.astro';
 import { landingContent } from '../content/landing';
+import { journey } from '../content/journey';
 
+const { book, author, purchaseLinks } = landingContent;
 const sections = landingContent.sections.filter((section) => section.enabled);
-const enabledIds = new Set(sections.map((section) => section.id));
+const enabled = new Set<string>(sections.map((section) => section.id));
+const drilo = sections.find((section) => section.id === 'drilo');
+const purpose = sections.find((section) => section.id === 'proposito');
+const edition = book.editions?.find((edition) => purchaseLinks.some((link) => link.editionId === edition.id));
+const waypoints = [
+  { id: 'inicio', label: 'La orilla' }, { id: 'drilo', label: 'Drilo' },
+  { id: 'historia', label: 'Las señales' }, { id: 'proposito', label: 'El manglar' },
+  { id: 'autora', label: 'La autora' }, { id: 'libro', label: 'El libro' },
+].filter((point) => enabled.has(point.id));
 ---
 
 <LandingLayout seo={landingContent.seo}>
-  <LandingHeader title={landingContent.book.title} sections={sections} />
+  <LandingHeader title={book.title} sections={sections} />
+  <nav class="river-wayfinder" aria-label="Orillas del recorrido">
+    <span class="wayfinder-label">En el río</span>
+    <ol>{waypoints.map((point) => <li><a href={`#${point.id}`} data-waypoint={point.id}><span class="waypoint-mark" aria-hidden="true"></span><span class="waypoint-label">{point.label}</span></a></li>)}</ol>
+  </nav>
   <main id="contenido" tabindex="-1">
-    {!enabledIds.has('inicio') && <h1 class="container fallback-title">{landingContent.book.title}</h1>}
-    {sections.map((section) => <LandingSection section={section} content={landingContent} enabledIds={enabledIds} />)}
+    {enabled.has('inicio') && (
+      <section id="inicio" class="river-hero" data-river-section aria-labelledby="inicio-titulo">
+        <RiverLandscape />
+        <div class="hero-copy container">
+          <p class="eyebrow">{journey.opening.label}</p>
+          <AnimatedTitle id="inicio-titulo" title={book.title} />
+          <p class="byline">Escrito e ilustrado por {book.author}</p>
+          <p class="hero-introduction">En el río de Drilo hay muchas señales por leer… y muchas formas de aprender.</p>
+          <div class="actions">
+            {enabled.has('drilo') && <a class="button" href="#drilo">Conoce a Drilo</a>}
+            {enabled.has('libro') && <a class="text-link" href="#libro">Encuentra el libro</a>}
+          </div>
+          <p class="reading-age">{journey.opening.age}</p>
+        </div>
+        <div class="hero-butterfly"><Butterfly /></div>
+        {enabled.has('drilo') && <a href="#drilo" class="current-invitation"><span class="current-symbol" aria-hidden="true">∿</span>{journey.opening.invitation}</a>}
+      </section>
+    )}
+
+    {drilo && (
+      <section id="drilo" class="river-encounter" data-river-section aria-labelledby="drilo-titulo">
+        <div class="encounter-current" aria-hidden="true"><svg viewBox="0 0 600 920" fill="none"><path class="encounter-shore" d="M300-90C590 90 36 253 260 422S552 630 300 1000" /><path class="encounter-water" d="M300-90C590 90 36 253 260 422S552 630 300 1000" /><path class="encounter-trail" pathLength="1" d="M300-90C590 90 36 253 260 422S552 630 300 1000" /></svg><span class="encounter-leaf"></span></div>
+        <div class="container encounter-layout">
+          <div class="encounter-margin"><Butterfly /><p>Hay historias<br />que empiezan<br />con una pregunta.</p></div>
+          <div class="encounter-copy">
+            <p class="eyebrow">{journey.encounter.label}</p>
+            <h2 id="drilo-titulo">{journey.encounter.heading}</h2>
+            {drilo.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <span class="river-stitch" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {enabled.has('historia') && <SignalPassage />}
+
+    {purpose && (
+      <section id="proposito" class="mangrove-rest" data-river-section aria-labelledby="proposito-titulo">
+        <Mangrove />
+        <div class="mangrove-light" aria-hidden="true"></div>
+        <div class="container rest-copy">
+          <p class="eyebrow">{journey.rest.label}</p>
+          <h2 id="proposito-titulo">{journey.rest.heading}</h2>
+          <p>{journey.rest.text}</p>
+          {purpose.quote && <figure class="grandmother-quote"><blockquote>«{purpose.quote.text}»</blockquote><figcaption>{purpose.quote.attribution}</figcaption></figure>}
+          <div class="quiet-water" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="container conversation-bank">
+          <div><p class="eyebrow">Para leer y escucharnos</p><h3>Una historia.<br />Muchas conversaciones.</h3><p>{purpose.paragraphs[1]}</p></div>
+          <ul>{purpose.questions?.map((question) => <li>{question}</li>)}</ul>
+        </div>
+      </section>
+    )}
+
+    {enabled.has('interior') && landingContent.gallery.length > 0 && <section id="interior" class="container interior-gallery" data-river-section aria-labelledby="interior-titulo"><h2 id="interior-titulo">Asómate al cuento</h2>{landingContent.gallery.map((image) => <figure><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" /><figcaption>{image.caption}</figcaption></figure>)}</section>}
+
+    {enabled.has('autora') && (
+      <section id="autora" class="author-bank" data-river-section aria-labelledby="autora-titulo">
+        <div class="container author-layout">
+          <div class="author-portrait">
+            {author.photo ? <img src={author.photo} alt={author.name} loading="lazy" /> : <div class="author-paper"><span class="portrait-leaf" aria-hidden="true"></span><p>{journey.author.portraitLabel}</p><span class="author-signature">Laura<br />Londoño</span><small>{journey.author.portraitCaption}</small></div>}
+          </div>
+          <div class="author-copy"><p class="eyebrow">{journey.author.label}</p><h2 id="autora-titulo">{author.name}</h2><p class="author-role">{author.role}</p><p>{author.biography}</p><ul class="author-links">{author.links.map((link) => <li><a class="text-link" href={link.url}>{link.label}</a></li>)}</ul></div>
+        </div>
+      </section>
+    )}
+
+    {enabled.has('libro') && (
+      <section id="libro" class="book-estuary" data-river-section aria-labelledby="libro-titulo">
+        <RiverLandscape variant="quiet" />
+        <div class="container estuary-layout">
+          <div class="book-copy"><p class="eyebrow">{journey.book.label}</p><h2 id="libro-titulo">{journey.book.heading}</h2><p>{journey.book.text}</p>
+            <ul class="purchase-links">{purchaseLinks.map((link) => <li><a class="button" href={link.url}>{link.label}</a></li>)}</ul>
+            <p class="purchase-note">{journey.book.note}</p>
+          </div>
+          <div class="edition-panel">
+            <p class="eyebrow">Para compartir desde los 5 años</p>
+            <h3>{book.title}</h3><p>Texto e ilustraciones<br />de {book.author}</p>
+            {edition && <><span class="river-stitch" aria-hidden="true"></span><dl class="edition-facts"><div><dt>Edición</dt><dd>{edition.publisher}</dd></div><div><dt>Páginas</dt><dd>{edition.pageCount}</dd></div><div><dt>Encuadernación</dt><dd>{edition.binding}</dd></div><div><dt>Formato</dt><dd>{edition.dimensions}</dd></div></dl></>}
+          </div>
+        </div>
+      </section>
+    )}
   </main>
   <LandingFooter footer={landingContent.footer} />
 </LandingLayout>

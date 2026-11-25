@@ -1,0 +1,29 @@
+---
+interface Props { variant?: 'opening' | 'crossing' | 'quiet'; }
+const { variant = 'opening' } = Astro.props;
+---
+<div class:list={['river-landscape', `river-landscape--${variant}`]} aria-hidden="true">
+  <svg viewBox="0 0 1200 1000" fill="none" preserveAspectRatio="xMidYMid slice" focusable="false">
+    <circle class="landscape-sun" cx="821" cy="190" r="92" />
+    <g class="landscape-distant">
+      <path d="M0 386Q128 235 274 352T561 330T841 303T1200 365V1000H0Z" />
+      <path d="M-40 478Q165 340 321 427T621 389T920 420T1230 393V1000H-40Z" />
+    </g>
+    <path class="landscape-bank" d="M-40 520Q172 391 353 507T680 489T1230 457V1020H-40Z" />
+    <path class="landscape-water" d="M803 369C655 419 419 417 423 527S958 589 865 730 433 854 446 1035H781C713 901 1172 824 1034 658S577 566 608 496 815 433 859 369Z" />
+    <g class="landscape-current" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <path d="M624 480q43-13 80-9m-170 75q46 18 103 15m177 81q55 15 91 42M672 845q-52 21-69 55m170-159q56-14 94-44M552 976q18-37 57-56" />
+    </g>
+    <g class="landscape-islands">
+      <path d="M913 537q71-33 128 4-72 26-128-4ZM201 728q103-42 193 14-112 28-193-14Z" />
+      <path d="m975 537-9-90m9 90 27-70m-732 267-9-102m9 102 35-69" stroke="currentColor" stroke-width="7" stroke-linecap="round" />
+    </g>
+    <g class="landscape-foreground">
+      <path d="M0 1000V605Q98 653 109 812q16-126 123-175-10 134-103 225 96-75 186-52-38 104-163 142l15 48ZM1200 1000V578q-99 77-97 224-51-100-134-97 21 107 100 164-108-41-164 7 65 89 174 86l-9 38Z" />
+      <path d="M37 923q81-116 117-177m1004 171q-59-92-88-133" stroke="var(--guard)" stroke-opacity=".25" stroke-width="3" />
+    </g>
+    <g class="landscape-birds" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="m566 242 18 7 17-7m46-32 12 5 12-5m-190 73 12 5 12-5" />
+    </g>
+  </svg>
+</div>

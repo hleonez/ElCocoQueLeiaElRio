@@ -1,5 +1,7 @@
 # Landing del libro
 
+La versión actual convierte la página en un recorrido por el río: entrada luminosa, paisaje por capas, señales entre juncos, pausa bajo el manglar y llegada al libro. Decisiones, archivos y validación en [RECORRIDO-RIO.md](RECORRIDO-RIO.md). Los textos de las escenas se editan en `src/content/journey.ts`; libro, autora y enlaces permanecen en `src/content/landing.ts`. `npm test` ejecuta las regresiones de la interacción y el seguimiento de escenas.
+
 Landing con Astro, TypeScript estricto y generación estática. Están preparadas las fases Contenido, Wireframe, Diseño visual, Versión estática y Animación con los recursos disponibles: recorrido responsive, título interactivo y escenas vinculadas al scroll. Las ilustraciones originales siguen pendientes. El nombre del paquete es un identificador técnico, no confirma el título del libro.
 
 ## Requisitos e inicio
