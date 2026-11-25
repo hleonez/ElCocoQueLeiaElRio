@@ -1,0 +1,58 @@
+---
+import { journey } from '../content/journey';
+const { passage } = journey;
+---
+<section id="historia" class="signal-passage" data-passage data-phase="signals" aria-labelledby="historia-titulo">
+  <div class="passage-entry container">
+    <p class="eyebrow">{passage.label}</p>
+    <h2 id="historia-titulo">{passage.heading}</h2>
+    <p class="passage-introduction">{passage.introduction}</p>
+    <span class="river-stitch" aria-hidden="true"></span>
+  </div>
+  <div class="passage-grid container">
+    <div class="passage-visual">
+      <div class="signal-world" data-signal-world>
+        <svg class="signal-river" viewBox="0 0 600 660" fill="none" aria-hidden="true" focusable="false">
+          <path class="signal-shore" d="M284-40C297 78 97 94 145 212S513 295 422 435 202 500 281 700" />
+          <path class="signal-water" d="M284-40C297 78 97 94 145 212S513 295 422 435 202 500 281 700" />
+          <path class="signal-branch" d="M380 345C234 332 70 411 22 558" />
+          <g class="signal-ripples"><path d="M175 160q-16 25-2 47m125 83q45 10 71 31m-37 196q-47 6-64 35M89 456l-26 35" /></g>
+          <g class="sign sign--far">
+            <path d="M380 244v-99" class="sign-post" />
+            <path d="m293 103 150-11 30 34-27 38-151 10Z" class="sign-board" />
+            <text x="378" y="128" text-anchor="middle"><tspan x="378">Escuela</tspan><tspan x="378" dy="23">del río</tspan></text>
+          </g>
+          <g class="sign sign--near">
+            <path d="m143 383 7-137" class="sign-post" />
+            <path d="m63 217 170 8-3 78-169-13-28-38Z" class="sign-board" />
+            <text x="141" y="249" text-anchor="middle"><tspan x="141">Peces</tspan><tspan x="141" dy="25">aguas arriba</tspan></text>
+          </g>
+          <g class="signal-reflection"><path d="m81 343 151 12m-160 9 169 10m-142 11 139 13" /></g>
+          <g class="passage-reeds passage-reeds--left">
+            <path d="M46 645C80 489 78 384 114 288M52 634C84 507 165 466 158 365M38 651C47 548 23 497 17 413" />
+            <path d="M114 419q-81-20-69-108 68 36 69 108Zm-6 33q68-64 84-109 17 94-84 109ZM50 559q-55-31-46-84 45 15 46 84Z" />
+          </g>
+          <g class="passage-reeds passage-reeds--right">
+            <path d="M578 653C529 486 557 377 496 272M570 652C503 545 477 489 474 421" />
+            <path d="M531 433q75-40 49-121-65 43-49 121Zm-3 72q-80-26-91-106 71 23 91 106ZM565 568q42-56 28-98-50 34-28 98Z" />
+          </g>
+        </svg>
+        <div class="scene-vignette" aria-hidden="true"></div>
+      </div>
+      <div class="signal-interaction">
+        <button type="button" class="quiet-button" data-reeds-toggle aria-pressed="false" aria-controls="signal-caption" hidden data-open-label={passage.reveal} data-close-label={passage.restore}>{passage.reveal}</button>
+        <p id="signal-caption" class="scene-caption" data-signal-caption data-closed={passage.closedCaption} data-open={passage.openCaption} aria-live="polite">{passage.closedCaption}</p>
+      </div>
+    </div>
+    <div class="passage-steps">
+      {passage.steps.map((step) => (
+        <article class="passage-step" data-passage-step={step.key}>
+          <p class="eyebrow">{step.label}</p>
+          <h3>{step.heading}</h3>
+          <p>{step.text}</p>
+          {step.key === 'listening' && <a class="text-link" href="#proposito">Descansa bajo el manglar</a>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
