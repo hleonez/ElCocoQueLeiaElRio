@@ -105,10 +105,19 @@ const waypoints = [
             <ul class="purchase-links">{purchaseLinks.map((link) => <li><a class="button" href={link.url}>{link.label}</a></li>)}</ul>
             <p class="purchase-note">{journey.book.note}</p>
           </div>
-          <div class="edition-panel">
+          <div class="book-flip" data-book-flip>
+            <p class="book-flip-hint eyebrow" aria-live="polite">Haz clic sobre la portada para conocer el libro</p>
+            <div class="book-flip-stage">
+            <div class="book-flip-pages">
+            <div class="book-flip-cover"><img src="/images/portada-drilo.png" alt={`Portada de ${book.title}, de ${book.author}`} loading="lazy" /></div>
+          <div class="edition-panel book-flip-back" aria-hidden="true">
             <p class="eyebrow">Para compartir desde los 5 años</p>
-            <h3>{book.title}</h3><p>Texto e ilustraciones<br />de {book.author}</p>
+            <h3>{book.title}</h3><p>Texto e ilustraciones de {book.author}</p>
             {edition && <><span class="river-stitch" aria-hidden="true"></span><dl class="edition-facts"><div><dt>Edición</dt><dd>{edition.publisher}</dd></div><div><dt>Páginas</dt><dd>{edition.pageCount}</dd></div><div><dt>Encuadernación</dt><dd>{edition.binding}</dd></div><div><dt>Formato</dt><dd>{edition.dimensions}</dd></div></dl></>}
+          </div>
+            </div>
+            <button class="book-flip-toggle" type="button" aria-label="Girar el libro para ver sus detalles" aria-pressed="false"></button>
+            </div>
           </div>
         </div>
       </section>
@@ -116,3 +125,21 @@ const waypoints = [
   </main>
   <LandingFooter footer={landingContent.footer} />
 </LandingLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-book-flip]').forEach((book) => {
+    const toggle = book.querySelector<HTMLButtonElement>('.book-flip-toggle')!;
+    const cover = book.querySelector<HTMLElement>('.book-flip-cover')!;
+    const back = book.querySelector<HTMLElement>('.book-flip-back')!;
+    const hint = book.querySelector<HTMLElement>('.book-flip-hint')!;
+    back.addEventListener('click', () => toggle.click());
+    toggle.addEventListener('click', () => {
+      const flipped = book.classList.toggle('is-flipped');
+      toggle.setAttribute('aria-pressed', String(flipped));
+      toggle.setAttribute('aria-label', flipped ? 'Volver a ver la portada' : 'Girar el libro para ver sus detalles');
+      cover.setAttribute('aria-hidden', String(flipped));
+      back.setAttribute('aria-hidden', String(!flipped));
+      hint.textContent = flipped ? 'Haz clic de nuevo para volver a la portada' : 'Haz clic sobre la portada para conocer el libro';
+    });
+  });
+</script>
